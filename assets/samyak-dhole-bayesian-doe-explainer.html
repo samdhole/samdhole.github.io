@@ -205,6 +205,17 @@
       gap: 8px;
     }
     footer a { color: var(--accent-strong); }
+
+    /* Inline citations */
+    .cite { font-size: 0.72em; vertical-align: super; color: var(--accent); text-decoration: none; }
+    .cite:hover { text-decoration: underline; }
+
+    /* References section */
+    #references { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); }
+    #references h2 { font-size: 1rem; margin-bottom: 12px; border: none; padding: 0; }
+    .ref-list { list-style: decimal; padding-left: 1.4em; font-size: 0.8rem; color: var(--muted); line-height: 1.7; }
+    .ref-list li { margin-bottom: 4px; }
+    .ref-list a { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -240,13 +251,27 @@
       accurately.
     </p>
     <p>
-      The synthesis route is mechano-chemical ball milling. Milling cuts per-batch time from
-      ~1 day to 30&ndash;45 minutes and enables rapid screening, but opens a 5-coupled-parameter
-      space (2 categorical, 3 continuous) where a full factorial design would require hundreds of
-      experiments. The goal: maximize Stokes shift (a 200+ nm gap between UV absorption and
-      orange emission prevents the composite from reabsorbing its own scintillation output),
-      maximize quantum yield, and minimize absorption edge wavelength, using as few synthesis
-      runs as possible.
+      The standard high-quality synthesis route for perovskite QDs is hot injection: precursors
+      dissolved in high-boiling solvents, heated above 200&deg;C under inert atmosphere, with one
+      composition per reaction vessel and roughly one working day per data point. Running a
+      30-experiment DOE by hot injection would occupy a bench for six weeks. Mechano-chemical
+      ball milling replaces the high-temperature solution step with mechanical energy: precursors
+      are ground together with milling balls in sealed vials, producing nanocrystals with
+      comparable optical quality in 30&ndash;45 minutes per batch of three
+      compositions.<a class="cite" href="#ref1">[1,2,3]</a> The 18&ndash;36x throughput
+      improvement is what makes iterative DOE feasible at the bench scale.
+    </p>
+    <p>
+      The 5-parameter space (2 categorical, 3 continuous) rules out exhaustive search regardless
+      of synthesis speed. A coarse 3-level grid requires 3 ligands &times; 3 cations &times;
+      3 Mn concentrations &times; 3 halide ratios &times; 3 milling times = 243 experiments;
+      at 5 levels for useful resolution that rises to 1,125. Beyond the raw count, grid and
+      random search are data-blind: each experiment is chosen without reference to what previous
+      runs revealed, so budget is wasted on uninformative regions of the
+      space.<a class="cite" href="#ref4">[4]</a> The goal: maximize Stokes shift (a 200+ nm gap
+      between UV absorption and orange emission prevents the composite from reabsorbing its own
+      scintillation output), maximize quantum yield, and minimize absorption edge wavelength,
+      using as few synthesis runs as possible.
     </p>
 
     <figure>
@@ -368,6 +393,20 @@
     </table>
 
     <h2>Approach</h2>
+    <p>
+      Bayesian optimization addresses the sample-efficiency problem directly. Rather than
+      evaluating conditions in a fixed order, it builds a probabilistic surrogate model of the
+      objective landscape (a Gaussian process) that updates after every batch. The model
+      identifies which untested conditions are most likely to expand the Pareto front,
+      concentrating experiments where information gain is highest. Benchmarked across five
+      experimental materials science domains, BO reaches near-optimal performance in roughly
+      15&ndash;25% of the experiments required by random search, with the efficiency advantage
+      growing as parameter space dimensionality
+      increases.<a class="cite" href="#ref4">[4,5]</a> The approach is validated directly for
+      QD synthesis: autonomous BO platforms have converged on target optical properties in fewer
+      than 35 experiments for colloidal perovskite and chalcogenide
+      systems.<a class="cite" href="#ref6">[6,7,8]</a>
+    </p>
     <p>
       <strong>Step 1: Latin Hypercube Sampling (LHS).</strong> LHS divides each parameter's range
       into equal intervals and places exactly one sample per interval, giving uniform coverage
@@ -765,7 +804,7 @@
       <span>BayBE</span><span>BoTorch</span><span>GPyTorch</span><span>Plotly</span>
     </div>
     <p>
-      BayBE (Merck KGaA's open-source Bayesian optimization framework for lab automation) wraps
+      BayBE (Merck KGaA's open-source Bayesian optimization framework for lab automation)<a class="cite" href="#ref9">[9]</a> wraps
       BoTorch and GPyTorch via <code>BotorchRecommender</code>. The mixed search space requires
       <code>SearchSpace.from_product</code>, which handles categorical parameters (ligand, cation)
       via one-hot encoding alongside continuous ranges. q-NEHVI was chosen over EHI because batch
@@ -811,6 +850,21 @@
       measurement data with matching statistical structure to demonstrate the campaign loop
       without reproducing raw experimental records.
     </div>
+
+    <section id="references">
+      <h2>References</h2>
+      <ol class="ref-list">
+        <li id="ref1">Protesescu, L. et al. (2018). Low-cost synthesis of highly luminescent colloidal lead halide perovskite nanocrystals by wet ball milling. <em>ACS Appl. Nano Mater.</em> 1(3), 1300&ndash;1308. <a href="https://doi.org/10.1021/acsanm.8b00038" target="_blank" rel="noopener">DOI: 10.1021/acsanm.8b00038</a></li>
+        <li id="ref2">Zhu, Z.-Y. et al. (2017). Solvent-free mechanosynthesis of composition-tunable cesium lead halide perovskite quantum dots. <em>J. Phys. Chem. Lett.</em> 8, 1610&ndash;1614. <a href="https://doi.org/10.1021/acs.jpclett.7b00431" target="_blank" rel="noopener">DOI: 10.1021/acs.jpclett.7b00431</a></li>
+        <li id="ref3">Palazon, F., El Ajjouri, Y., &amp; Bolink, H. J. (2020). Making by grinding: mechanochemistry boosts the development of halide perovskites and other multinary metal halides. <em>Adv. Energy Mater.</em> 10, 1902499. <a href="https://doi.org/10.1002/aenm.201902499" target="_blank" rel="noopener">DOI: 10.1002/aenm.201902499</a></li>
+        <li id="ref4">Liang, Q. et al. (2021). Benchmarking the performance of Bayesian optimization across multiple experimental materials science domains. <em>npj Comput. Mater.</em> 7, 188. <a href="https://doi.org/10.1038/s41524-021-00656-9" target="_blank" rel="noopener">DOI: 10.1038/s41524-021-00656-9</a></li>
+        <li id="ref5">Shields, B. J. et al. (2021). Bayesian reaction optimization as a tool for chemical synthesis. <em>Nature</em> 590, 89&ndash;96. <a href="https://doi.org/10.1038/s41586-021-03213-y" target="_blank" rel="noopener">DOI: 10.1038/s41586-021-03213-y</a></li>
+        <li id="ref6">Epps, R. W. et al. (2020). Artificial chemist: an autonomous quantum dot synthesis bot. <em>Adv. Mater.</em> 32, 2001626. <a href="https://doi.org/10.1002/adma.202001626" target="_blank" rel="noopener">DOI: 10.1002/adma.202001626</a></li>
+        <li id="ref7">Voznyy, O. et al. (2019). Machine learning accelerates discovery of optimal colloidal quantum dot synthesis. <em>ACS Nano</em> 13(10), 11122&ndash;11128. <a href="https://doi.org/10.1021/acsnano.9b03864" target="_blank" rel="noopener">DOI: 10.1021/acsnano.9b03864</a></li>
+        <li id="ref8">Lampe, C. et al. (2023). Rapid data-efficient optimization of perovskite nanocrystal syntheses through machine learning algorithm fusion. <em>Adv. Mater.</em> 35, 2208772. <a href="https://doi.org/10.1002/adma.202208772" target="_blank" rel="noopener">DOI: 10.1002/adma.202208772</a></li>
+        <li id="ref9">Fitzner, M. et al. (2025). BayBE: a Bayesian back end for experimental planning in the low-to-no-data regime. <em>Digital Discovery</em> 4(8), 1991&ndash;2000. <a href="https://doi.org/10.1039/D5DD00050E" target="_blank" rel="noopener">DOI: 10.1039/D5DD00050E</a></li>
+      </ol>
+    </section>
 
     <footer>
       <span>Sam Dhole, PhD, Materials Scientist for Technical Documents</span>
