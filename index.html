@@ -433,6 +433,33 @@
     tr:last-child td {
       border-bottom: 0;
     }
+    .stakes-block {
+      margin: 22px 0 0;
+      padding: 18px 20px;
+      border: 1px solid var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+    .stakes-label {
+      font-size: 0.76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+      margin: 0 0 10px;
+    }
+    .stakes-block ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #30363a;
+      font-size: 0.95rem;
+    }
+    .stakes-block li {
+      margin-bottom: 6px;
+    }
+    .stakes-block li:last-child {
+      margin-bottom: 0;
+    }
     .price-note {
       margin: 14px 0 0;
       color: var(--muted);
@@ -741,7 +768,7 @@
         <div class="card-grid">
           <article class="service-card">
             <h3>Technical-Document AI Systems</h3>
-            <p>For technical teams that need searchable, cited answers or structured fields from complex document libraries.</p>
+            <p>For technical teams whose engineers spend hours manually searching PDF libraries, and where a generic chatbot that cannot identify a wrong compliance classification creates more liability than it saves.</p>
             <ul>
               <li>Cited RAG over SOPs, SDSs, reports, or scientific PDFs</li>
               <li>Document extraction and evaluation sprint</li>
@@ -752,7 +779,7 @@
           </article>
           <article class="service-card">
             <h3>SBIR and R&amp;D Technical Documentation</h3>
-            <p>For teams that need a materials scientist to pressure-test the technical story before submission or review.</p>
+            <p>For teams that need a materials scientist to pressure-test the technical story before submission, when a weak experimental plan or undefended milestone is the gap between a funded Phase I ($200K-$300K) and a 6-month resubmission cycle.</p>
             <ul>
               <li>Experimental-plan review</li>
               <li>Milestone feasibility review</li>
@@ -763,7 +790,7 @@
           </article>
           <article class="service-card">
             <h3>Advanced Materials Compliance Review</h3>
-            <p>For unusual materials where generic SDS or compliance writing misses the science.</p>
+            <p>For unusual materials where generic SDS writing misses the science, and where a missed hazard classification or wrong exposure route is the error a distributor or OSHA auditor catches first.</p>
             <ul>
               <li>SDS/GHS/HazCom technical review</li>
               <li>Nanomaterial and specialty chemical documentation support</li>
@@ -774,7 +801,7 @@
           </article>
           <article class="service-card">
             <h3>Materials Characterization and Feasibility</h3>
-            <p>For R&amp;D teams trying to understand why a material, coating, detector, or process is not behaving as expected.</p>
+            <p>For R&amp;D teams trying to understand why a material or process is not behaving as expected, before committing more time and budget to a direction the characterization data does not support.</p>
             <ul>
               <li>Characterization interpretation: XRD, SEM/EDX, Raman, FTIR, UV-Vis, PL/TRPL</li>
               <li>Root-cause or feasibility memo</li>
@@ -856,16 +883,24 @@
               <tr><th>Engagement</th><th>Typical Range</th><th>Output</th></tr>
             </thead>
             <tbody>
-              <tr><td data-label="Engagement">SDS/HazCom triage</td><td data-label="Typical range">$500-$1,500</td><td data-label="Output">Section-level action log</td></tr>
+              <tr><td data-label="Engagement">SDS/HazCom triage</td><td data-label="Typical range">$500-$1,500</td><td data-label="Output">Section-level action log identifying gaps before a distributor rejection or OSHA audit</td></tr>
               <tr><td data-label="Engagement">Advanced-material SDS review</td><td data-label="Typical range">$250-$500 per SDS</td><td data-label="Output">Annotated technical review</td></tr>
-              <tr><td data-label="Engagement">SBIR technical review</td><td data-label="Typical range">$750-$2,500</td><td data-label="Output">Feasibility or red-team memo</td></tr>
+              <tr><td data-label="Engagement">SBIR technical review</td><td data-label="Typical range">$750-$2,500</td><td data-label="Output">Feasibility memo that de-risks a Phase I or II submission ($200K-$2M award range)</td></tr>
               <tr><td data-label="Engagement">Scientific workflow audit</td><td data-label="Typical range">$500-$750</td><td data-label="Output">Workflow findings and recommendations</td></tr>
               <tr><td data-label="Engagement">Workflow audit plus prototype</td><td data-label="Typical range">$1,500-$2,500</td><td data-label="Output">Small working prototype plus notes</td></tr>
-              <tr><td data-label="Engagement">Technical-document AI:discovery</td><td data-label="Typical range">$500–$750</td><td data-label="Output">Discovery sprint and evaluation report</td></tr>
+              <tr><td data-label="Engagement">Technical-document AI: discovery</td><td data-label="Typical range">$500–$750</td><td data-label="Output">Cited eval report with acceptance criteria, not a generic chatbot</td></tr>
               <tr><td data-label="Engagement">Technical-document AI:pilot</td><td data-label="Typical range">$1,500–$2,000</td><td data-label="Output">Cited demo with human review and failure log</td></tr>
               <tr><td data-label="Engagement">Technical-document AI:integration</td><td data-label="Typical range">$3,000–$5,000</td><td data-label="Output">Full integration, eval report, and handoff</td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="stakes-block">
+          <p class="stakes-label">What a first project typically protects</p>
+          <ul>
+            <li>A $750 SDS technical review identifies issues before a distributor rejection, audit, or reformulation cycle, not after.</li>
+            <li>A $1,500 SBIR review catches technical section gaps before submission, when they can still be fixed.</li>
+            <li>A $1,500 AI pilot with an eval report tells you whether the system is trustworthy on your documents before you commit to integration.</li>
+          </ul>
         </div>
         <p class="price-note">These ranges are planning anchors, not a quote. High-risk outputs require human review and explicit acceptance criteria.</p>
       </div>
@@ -914,7 +949,7 @@
         <div class="process">
           <article class="step"><span class="step-num">01</span><h3>Intake</h3><p>Define the material, document set, workflow, deadline, budget, and decision.</p></article>
           <article class="step"><span class="step-num">02</span><h3>Diagnostic</h3><p>Set fixed scope, representative files, and acceptance criteria.</p></article>
-          <article class="step"><span class="step-num">03</span><h3>Evidence-backed output</h3><p>Deliver a memo, action log, eval report, prototype, or review.</p></article>
+          <article class="step"><span class="step-num">03</span><h3>Evidence-backed output</h3><p>Deliver a memo, action log, eval report, prototype, or review. Every output includes explicit scope limits and human-review flags, so you know exactly what the deliverable covers and where expert judgment is still required.</p></article>
           <article class="step"><span class="step-num">04</span><h3>Follow-on</h3><p>Move into rewrite, automation, integration, or deeper review if useful.</p></article>
           <article class="step"><span class="step-num">05</span><h3>Handoff</h3><p>Provide files, assumptions, limitations, and next-step options.</p></article>
         </div>
