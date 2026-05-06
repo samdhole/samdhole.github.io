@@ -249,6 +249,85 @@
       runs as possible.
     </p>
 
+    <figure>
+      <!-- Absorption + emission spectra: Cherenkov region (blue) / Scintillation region (orange) -->
+      <svg viewBox="0 0 560 310" xmlns="http://www.w3.org/2000/svg"
+           style="width:100%;display:block;background:#fafbfc;border-radius:6px;border:1px solid var(--line);"
+           role="img" aria-label="QD-PMMA absorption and emission spectra showing Cherenkov Collection Region and Scintillation Region with 200+ nm Stokes shift">
+        <!-- plot area: x 70-520, y 20-255, w=450, h=235 -->
+        <!-- x: 280nm→70, 680nm→520, scale=1.125px/nm; y: 0→255, 1.0→20, scale=235 -->
+
+        <!-- background regions -->
+        <rect x="70" y="20" width="282" height="235" fill="#e0f2f8" opacity="0.7"/>
+        <rect x="352" y="20" width="168" height="235" fill="#fde8d0" opacity="0.7"/>
+
+        <!-- region labels -->
+        <text x="175" y="120" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#2a6080" font-style="italic">Cherenkov Collection Region</text>
+        <text x="436" y="90" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#904010" font-style="italic">Scintillation</text>
+        <text x="436" y="104" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#904010" font-style="italic">Region</text>
+
+        <!-- broad absorption background (exponential decay, filled, semi-transparent blue) -->
+        <path d="M 70,20 C 90,20 110,28 140,60 C 165,90 200,160 240,210 C 275,240 320,252 352,255 L 352,255 L 70,255 Z"
+              fill="#90cce0" opacity="0.35"/>
+
+        <!-- cyan absorption spike at 340nm (x=137.5) -->
+        <path d="M 115,255 C 122,255 128,255 132,200 C 135,150 136,80 137.5,20 C 139,80 140.5,150 143.5,200 C 147,255 152,255 160,255"
+              fill="#00bcd4" opacity="0.5"/>
+        <path d="M 115,255 C 122,255 128,255 132,200 C 135,150 136,80 137.5,20 C 139,80 140.5,150 143.5,200 C 147,255 152,255 160,255"
+              fill="none" stroke="#00a0c0" stroke-width="1.5"/>
+
+        <!-- orange emission curve at 575nm (x=402) — broad Gaussian -->
+        <path d="M 310,255 C 330,255 345,255 362,240 C 374,228 385,200 392,160 C 397,120 400,70 402,20 C 404,70 406,120 412,160 C 419,200 430,228 445,245 C 462,255 490,255 520,255"
+              fill="#ff8c00" opacity="0.20"/>
+        <path d="M 310,255 C 330,255 345,255 362,240 C 374,228 385,200 392,160 C 397,120 400,70 402,20 C 404,70 406,120 412,160 C 419,200 430,228 445,245 C 462,255 490,255 520,255"
+              fill="none" stroke="#e06000" stroke-width="2"/>
+
+        <!-- dashed vertical lines -->
+        <line x1="137.5" y1="20" x2="137.5" y2="255" stroke="#444" stroke-width="1" stroke-dasharray="5,3"/>
+        <line x1="402" y1="20" x2="402" y2="255" stroke="#444" stroke-width="1" stroke-dasharray="5,3"/>
+
+        <!-- axes -->
+        <line x1="70" y1="255" x2="520" y2="255" stroke="#333" stroke-width="1.5"/>
+        <line x1="70" y1="20"  x2="70"  y2="255" stroke="#333" stroke-width="1.5"/>
+
+        <!-- x axis ticks and labels -->
+        <line x1="70"  y1="255" x2="70"  y2="261" stroke="#555" stroke-width="1"/>
+        <line x1="183" y1="255" x2="183" y2="261" stroke="#555" stroke-width="1"/>
+        <line x1="295" y1="255" x2="295" y2="261" stroke="#555" stroke-width="1"/>
+        <line x1="408" y1="255" x2="408" y2="261" stroke="#555" stroke-width="1"/>
+        <line x1="520" y1="255" x2="520" y2="261" stroke="#555" stroke-width="1"/>
+        <text x="70"  y="272" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#555">280</text>
+        <text x="183" y="272" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#555">380</text>
+        <text x="295" y="272" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#555">480</text>
+        <text x="408" y="272" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#555">580</text>
+        <text x="520" y="272" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#555">680</text>
+        <text x="295" y="292" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#333">Wavelength (nm)</text>
+
+        <!-- y axis ticks and labels -->
+        <line x1="64" y1="255" x2="70" y2="255" stroke="#555" stroke-width="1"/>
+        <line x1="64" y1="138" x2="70" y2="138" stroke="#555" stroke-width="1"/>
+        <line x1="64" y1="20"  x2="70" y2="20"  stroke="#555" stroke-width="1"/>
+        <text x="60" y="258" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#555">0</text>
+        <text x="60" y="141" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#555">0.5</text>
+        <text x="60" y="23"  text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#555">1.0</text>
+        <text x="14" y="138" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#333" transform="rotate(-90 14 138)">Normalized Intensity</text>
+
+        <!-- Stokes shift annotation arrow -->
+        <line x1="138" y1="40" x2="402" y2="40" stroke="#555" stroke-width="1" marker-end="url(#arr-s)" marker-start="url(#arr-s2)"/>
+        <defs>
+          <marker id="arr-s" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#555"/></marker>
+          <marker id="arr-s2" markerWidth="6" markerHeight="5" refX="1" refY="2.5" orient="auto"><polygon points="6,0 0,2.5 6,5" fill="#555"/></marker>
+        </defs>
+        <text x="270" y="36" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#555">Stokes shift ~200 nm</text>
+      </svg>
+      <figcaption>
+        Absorption and emission spectra of the QD-PMMA composite. Cherenkov photons (UV, ~300&ndash;400 nm)
+        are absorbed by the quantum dots and re-emitted as orange scintillation (~560&ndash;670 nm).
+        The 200+ nm spectral separation is the Stokes shift being optimized: a larger gap prevents
+        the composite from reabsorbing its own scintillation output inside the detector block.
+      </figcaption>
+    </figure>
+
     <h2>Parameter Space</h2>
     <table>
       <thead>
@@ -461,35 +540,76 @@
 
     <div class="fig-row">
       <figure>
-        <svg viewBox="0 0 240 155" xmlns="http://www.w3.org/2000/svg"
-             style="width:100%; border-radius:4px; display:block; border:1px solid var(--line);"
-             aria-label="Mechano-chemical batch mill schematic">
+        <!-- Mechano-chemical ball mill cross-section schematic -->
+        <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%;border-radius:4px;display:block;border:1px solid var(--line);"
+             aria-label="Mechano-chemical batch mill cross-section schematic">
           <defs>
-            <linearGradient id="mill-body" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#b0b8c4"/>
+            <linearGradient id="drum-g" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c8cdd6"/>
+              <stop offset="100%" stop-color="#70788a"/>
+            </linearGradient>
+            <linearGradient id="lid-g" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#aab0bc"/>
               <stop offset="100%" stop-color="#606878"/>
             </linearGradient>
+            <linearGradient id="ball-g" cx="40%" cy="35%" r="60%" gradientUnits="objectBoundingBox">
+              <stop offset="0%" stop-color="#e8eaee"/>
+              <stop offset="100%" stop-color="#909090"/>
+            </linearGradient>
           </defs>
-          <rect width="240" height="155" fill="#f0eee6" rx="4"/>
-          <text x="120" y="16" text-anchor="middle" font-size="9" font-weight="700"
-                fill="#5f676b" font-family="Arial,sans-serif">Mechano-chemical ball mill</text>
-          <!-- mill drum -->
-          <ellipse cx="120" cy="80" rx="60" ry="50" fill="url(#mill-body)" stroke="#444" stroke-width="2"/>
-          <ellipse cx="120" cy="80" rx="60" ry="12" fill="#888" stroke="#444" stroke-width="1" opacity="0.6"/>
-          <!-- balls inside -->
-          <circle cx="100" cy="78" r="8" fill="#ccc" stroke="#888" stroke-width="1"/>
-          <circle cx="120" cy="90" r="8" fill="#ccc" stroke="#888" stroke-width="1"/>
-          <circle cx="140" cy="74" r="8" fill="#ccc" stroke="#888" stroke-width="1"/>
-          <!-- lid -->
-          <rect x="64" y="31" width="112" height="10" rx="4" fill="#9098a8" stroke="#444" stroke-width="1"/>
-          <!-- axis -->
-          <line x1="8" y1="80" x2="64" y2="80" stroke="#666" stroke-width="3"/>
-          <line x1="176" y1="80" x2="232" y2="80" stroke="#666" stroke-width="3"/>
-          <circle cx="8" cy="80" r="5" fill="#555"/>
-          <circle cx="232" cy="80" r="5" fill="#555"/>
-          <!-- label -->
-          <text x="120" y="142" text-anchor="middle" font-size="9"
-                fill="#5f676b" font-family="Arial,sans-serif">3 compositions &middot; 30&ndash;45 min/batch</text>
+
+          <!-- background -->
+          <rect width="240" height="200" fill="#f5f3ed" rx="4"/>
+
+          <!-- title -->
+          <text x="120" y="14" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#5f676b">Mechano-chemical batch mill</text>
+
+          <!-- shaft axles -->
+          <rect x="4" y="88" width="38" height="8" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
+          <rect x="198" y="88" width="38" height="8" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
+          <!-- shaft collars -->
+          <ellipse cx="42" cy="92" rx="6" ry="8" fill="#999" stroke="#555" stroke-width="1"/>
+          <ellipse cx="198" cy="92" rx="6" ry="8" fill="#999" stroke="#555" stroke-width="1"/>
+
+          <!-- drum body (cylinder side view) -->
+          <rect x="42" y="52" width="156" height="80" rx="4" fill="url(#drum-g)" stroke="#555" stroke-width="1.5"/>
+
+          <!-- inner chamber (cut-away) -->
+          <rect x="50" y="62" width="140" height="60" rx="3" fill="#e8ede8"/>
+
+          <!-- milling balls inside -->
+          <circle cx="80"  cy="102" r="10" fill="url(#ball-g)" stroke="#888" stroke-width="1"/>
+          <circle cx="108" cy="94"  r="10" fill="url(#ball-g)" stroke="#888" stroke-width="1"/>
+          <circle cx="136" cy="104" r="10" fill="url(#ball-g)" stroke="#888" stroke-width="1"/>
+          <circle cx="162" cy="96"  r="10" fill="url(#ball-g)" stroke="#888" stroke-width="1"/>
+
+          <!-- powder/material between balls -->
+          <ellipse cx="94"  cy="112" rx="10" ry="4" fill="#c8a060" opacity="0.6"/>
+          <ellipse cx="122" cy="112" rx="10" ry="4" fill="#c8a060" opacity="0.6"/>
+          <ellipse cx="150" cy="112" rx="10" ry="4" fill="#c8a060" opacity="0.6"/>
+
+          <!-- drum lid (top cap) -->
+          <rect x="42" y="44" width="156" height="12" rx="3" fill="url(#lid-g)" stroke="#555" stroke-width="1.5"/>
+
+          <!-- drum front ellipse face -->
+          <ellipse cx="42" cy="92" rx="8" ry="40" fill="#c0c8d4" stroke="#555" stroke-width="1.5"/>
+          <!-- drum back face (lighter) -->
+          <ellipse cx="198" cy="92" rx="8" ry="40" fill="#d4d8e0" stroke="#555" stroke-width="1.5"/>
+
+          <!-- rotation arrows on drum -->
+          <path d="M 120,46 A 46,12 0 0 1 155,46" fill="none" stroke="#444" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <polygon points="155,46 152,41 158,41" fill="#444"/>
+
+          <!-- labels -->
+          <text x="120" y="152" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#5f676b">3 compositions &middot; 30&ndash;45 min/batch</text>
+          <text x="120" y="164" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#888">vs. ~1 day/run by hot-injection</text>
+
+          <!-- dimension annotation -->
+          <line x1="50" y1="175" x2="190" y2="175" stroke="#aaa" stroke-width="1"/>
+          <line x1="50" y1="171" x2="50" y2="179" stroke="#aaa" stroke-width="1"/>
+          <line x1="190" y1="171" x2="190" y2="179" stroke="#aaa" stroke-width="1"/>
+          <text x="120" y="186" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#888">~100 mm chamber</text>
         </svg>
         <figcaption>
           Mechano-chemical batch mill. Three compositions in 30&ndash;45 min vs. ~1 day per
@@ -546,6 +666,108 @@
       quantum yield 83&ndash;92% &middot; absorption edge 395&ndash;403 nm</strong>. Best single
       quantum yield observed: 94% (Octylamine/MA).
     </div>
+    <!-- Pareto front scatter: Stokes Shift × Quantum Yield, 6 red diamonds = non-dominated -->
+    <figure>
+      <svg viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg"
+           style="width:100%;display:block;background:#fafbfc;border-radius:6px;border:1px solid var(--line);"
+           role="img" aria-label="Pareto front scatter plot: Stokes Shift vs Quantum Yield. Red diamonds are the 6 non-dominated experiments.">
+        <!-- plot area x:60-410, y:20-265; w=350, h=245 -->
+        <!-- Stokes: 160-220nm → x=60-410, scale=350/60=5.833px/nm -->
+        <!-- QY: 0.2-1.0 → y=265-20, scale=245/0.8=306px/unit -->
+
+        <!-- grid -->
+        <line x1="60" y1="20"  x2="60"  y2="265" stroke="#ddd" stroke-width="1"/>
+        <line x1="60" y1="265" x2="410" y2="265" stroke="#ddd" stroke-width="1"/>
+        <line x1="60" y1="143" x2="410" y2="143" stroke="#eee" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="60" y1="81"  x2="410" y2="81"  stroke="#eee" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="177" y1="20" x2="177" y2="265" stroke="#eee" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="294" y1="20" x2="294" y2="265" stroke="#eee" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="410" y1="20" x2="410" y2="265" stroke="#eee" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <!-- Pareto frontier region annotation -->
+        <rect x="295" y="21" width="114" height="100" rx="4" fill="#fff0e0" opacity="0.6"/>
+        <text x="352" y="35" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#904010">optimal cluster</text>
+
+        <!-- dominated experiments (24 gray circles) — scattered lower-left to mid -->
+        <!-- x(nm)=60+(nm-160)*5.833; y(qy)=265-(qy-0.2)*306.25 -->
+        <circle cx="95"  cy="246" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="119" cy="235" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="107" cy="219" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="137" cy="208" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="155" cy="196" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="130" cy="185" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="165" cy="175" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="180" cy="163" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="148" cy="157" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="195" cy="150" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="210" cy="143" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="172" cy="138" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="225" cy="131" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="240" cy="121" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="200" cy="115" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="255" cy="109" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="268" cy="100" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="222" cy="97"  r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="280" cy="91"  r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="244" cy="87"  r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="295" cy="84"  r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="310" cy="79"  r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="268" cy="75"  r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <circle cx="325" cy="72"  r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+
+        <!-- Pareto-optimal (6 red diamonds) — upper-right cluster, Stokes 203-212, QY 83-94% -->
+        <!-- (203,0.87)→x=60+(43*5.833)=310,y=265-(0.67*306.25)=60 -->
+        <!-- (205,0.85)→x=322,y=67 (206,0.88)→x=328,y=58 (208,0.90)→x=340,y=51 (210,0.92)→x=352,y=45 (212,0.94)→x=363,y=38 -->
+        <polygon points="310,48 318,60 310,72 302,60" fill="#e03020" stroke="#900000" stroke-width="1"/>
+        <polygon points="322,55 330,67 322,79 314,67" fill="#e03020" stroke="#900000" stroke-width="1"/>
+        <polygon points="328,46 336,58 328,70 320,58" fill="#e03020" stroke="#900000" stroke-width="1"/>
+        <polygon points="340,41 348,53 340,65 332,53" fill="#e03020" stroke="#900000" stroke-width="1"/>
+        <polygon points="352,36 360,48 352,60 344,48" fill="#e03020" stroke="#900000" stroke-width="1"/>
+        <polygon points="363,31 371,43 363,55 355,43" fill="#e03020" stroke="#900000" stroke-width="1"/>
+
+        <!-- axes -->
+        <line x1="60" y1="265" x2="410" y2="265" stroke="#333" stroke-width="1.5"/>
+        <line x1="60" y1="20"  x2="60"  y2="265" stroke="#333" stroke-width="1.5"/>
+
+        <!-- x ticks and labels -->
+        <line x1="60"  y1="265" x2="60"  y2="271" stroke="#555" stroke-width="1"/>
+        <line x1="177" y1="265" x2="177" y2="271" stroke="#555" stroke-width="1"/>
+        <line x1="294" y1="265" x2="294" y2="271" stroke="#555" stroke-width="1"/>
+        <line x1="410" y1="265" x2="410" y2="271" stroke="#555" stroke-width="1"/>
+        <text x="60"  y="281" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#555">160</text>
+        <text x="177" y="281" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#555">180</text>
+        <text x="294" y="281" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#555">200</text>
+        <text x="410" y="281" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#555">220</text>
+        <text x="235" y="298" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#333">Stokes Shift (nm) &rarr; maximize</text>
+
+        <!-- y ticks and labels -->
+        <line x1="54" y1="265" x2="60" y2="265" stroke="#555" stroke-width="1"/>
+        <line x1="54" y1="204" x2="60" y2="204" stroke="#555" stroke-width="1"/>
+        <line x1="54" y1="143" x2="60" y2="143" stroke="#555" stroke-width="1"/>
+        <line x1="54" y1="81"  x2="60" y2="81"  stroke="#555" stroke-width="1"/>
+        <line x1="54" y1="20"  x2="60" y2="20"  stroke="#555" stroke-width="1"/>
+        <text x="50" y="268" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#555">0.2</text>
+        <text x="50" y="207" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#555">0.4</text>
+        <text x="50" y="146" text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#555">0.6</text>
+        <text x="50" y="84"  text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#555">0.8</text>
+        <text x="50" y="23"  text-anchor="end" font-family="Arial,sans-serif" font-size="10" fill="#555">1.0</text>
+        <text x="14" y="143" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#333" transform="rotate(-90 14 143)">Quantum Yield &rarr; maximize</text>
+
+        <!-- legend -->
+        <rect x="62" y="22" width="130" height="42" rx="3" fill="white" stroke="#ddd" stroke-width="1"/>
+        <circle cx="76" cy="35" r="5" fill="#b0b8c4" stroke="#888" stroke-width="0.5"/>
+        <text x="85" y="39" font-family="Arial,sans-serif" font-size="9" fill="#555">Dominated (24)</text>
+        <polygon points="76,46 82,54 76,62 70,54" fill="#e03020" stroke="#900000" stroke-width="1"/>
+        <text x="85" y="57" font-family="Arial,sans-serif" font-size="9" fill="#555">Pareto-optimal (6)</text>
+      </svg>
+      <figcaption>
+        Pareto front: Stokes shift vs. quantum yield across 30 experiments. Red diamonds are
+        non-dominated: no other experiment beats these on all three objectives (Stokes shift,
+        quantum yield, absorption edge) simultaneously. Optimal cluster at Stokes 203&ndash;212 nm,
+        QY 83&ndash;94%, absorption edge 395&ndash;403 nm.
+      </figcaption>
+    </figure>
+
     <p>
       The MA A-site cation + APTES ligand + low Mn doping (1&ndash;10 mol%) holds 3 of 6
       Pareto-optimal experiments, a region the initial LHS sampled only sparsely. Bayesian
