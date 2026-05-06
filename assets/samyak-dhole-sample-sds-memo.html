@@ -1,0 +1,234 @@
+<!doctype html>
+<!--
+@status: active
+@issues: none
+@todo: none
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample SDS Gap Analysis Memo — Samyak Dhole, PhD</title>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --paper: #fffefa;
+      --ink: #191b1d;
+      --muted: #5f676b;
+      --line: #d8d4c8;
+      --accent: #12605a;
+      --accent-strong: #0d4743;
+      --accent-soft: #dcebe8;
+      --warn: #7a5a15;
+      --max: 860px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 32px;
+      color: var(--accent-strong);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .back:hover { text-decoration: underline; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(18,96,90,0.24);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 5px 10px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.1;
+      margin: 0 0 8px;
+    }
+    .disclaimer {
+      margin: 0 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      border-left: 3px solid var(--line);
+      padding-left: 14px;
+    }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      margin: 40px 0 10px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
+    h3 { font-size: 1rem; margin: 24px 0 6px; }
+    p { margin: 0 0 14px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+      margin-bottom: 20px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      background: #f0eee6;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .priority-high { color: #8b2000; font-weight: 700; }
+    .priority-med  { color: var(--warn); font-weight: 700; }
+    .priority-low  { color: var(--muted); }
+    ol, ul { padding-left: 20px; margin: 0 0 14px; }
+    li { margin-bottom: 6px; }
+    .scope {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.88rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--accent-strong); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../index.html">← Back to samyakdhole.com</a>
+    <span class="badge">Portfolio sample — fictional material</span>
+    <h1>Sample SDS Gap Analysis Memo</h1>
+    <p class="disclaimer">This memo uses a fictional advanced-material product to demonstrate deliverable style. It is not a legal determination and does not reflect any real client or NDA-covered work.</p>
+
+    <h2>Client Material</h2>
+    <p><strong>Product:</strong> QD-Polymer Masterbatch A<br>
+    <strong>Type:</strong> Quantum-dot loaded polymer composite pellet for R&amp;D evaluation<br>
+    <strong>Known inputs:</strong> Cd/Zn/S quantum dots in PMMA matrix, proprietary surface ligand package, intended for optical testing by research customers.</p>
+
+    <h2>Objective</h2>
+    <p>Review the current SDS for technical gaps relevant to GHS/HazCom documentation and identify questions requiring client confirmation, testing data, or legal/regulatory review.</p>
+
+    <h2>Executive Summary</h2>
+    <p>The SDS is usable as a starting document but needs technical strengthening before broad customer distribution. The highest-priority issues are composition specificity, dust/particulate exposure language, cadmium compound rationale, physical form assumptions, and disposal guidance. The SDS should distinguish hazards of the bulk polymer pellet from hazards that may emerge during cutting, grinding, heating, or powder generation.</p>
+
+    <h2>Priority Action Log</h2>
+    <table>
+      <thead>
+        <tr><th>Priority</th><th>SDS Section</th><th>Issue</th><th>Recommended Action</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="priority-high">High</td>
+          <td>Section 3</td>
+          <td>Composition does not clearly identify whether cadmium is present as bound QD core material or free soluble cadmium species.</td>
+          <td>Add confidential concentration range and clarify chemical form. Confirm TSCA inventory/PMN/exemption status separately.</td>
+        </tr>
+        <tr>
+          <td class="priority-high">High</td>
+          <td>Section 2</td>
+          <td>Hazard classification appears copied from bulk PMMA and does not address embedded heavy-metal nanomaterial content.</td>
+          <td>Reassess classification basis using available toxicology, composition, and exposure form.</td>
+        </tr>
+        <tr>
+          <td class="priority-high">High</td>
+          <td>Section 8</td>
+          <td>Exposure controls only discuss nuisance dust.</td>
+          <td>Add controls for cutting/grinding/sanding, local exhaust, respirator triggers, and glove compatibility where relevant.</td>
+        </tr>
+        <tr>
+          <td class="priority-med">Medium</td>
+          <td>Section 9</td>
+          <td>Particle-size and physical-form fields are incomplete.</td>
+          <td>Add pellet size range, dust generation potential, softening/melting range, and decomposition considerations.</td>
+        </tr>
+        <tr>
+          <td class="priority-med">Medium</td>
+          <td>Section 10</td>
+          <td>Stability language does not mention thermal processing limits.</td>
+          <td>Add temperature range, decomposition products, and avoid-overheating language.</td>
+        </tr>
+        <tr>
+          <td class="priority-med">Medium</td>
+          <td>Section 13</td>
+          <td>Disposal language is generic.</td>
+          <td>Add instruction to dispose according to heavy-metal-containing material requirements where applicable.</td>
+        </tr>
+        <tr>
+          <td class="priority-low">Low</td>
+          <td>Section 11</td>
+          <td>Toxicology is generic and unsupported.</td>
+          <td>Add "no product-specific toxicology data available" if true, and separate component-level information.</td>
+        </tr>
+        <tr>
+          <td class="priority-low">Low</td>
+          <td>Section 16</td>
+          <td>Revision history missing.</td>
+          <td>Add revision date, rationale, and data sources used.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Technical Questions for Client</h2>
+    <ol>
+      <li>What is the QD loading by weight and expected confidential concentration range?</li>
+      <li>Is cadmium present only in crystalline Cd/Zn/S QD form, or can soluble cadmium species be present?</li>
+      <li>Is the product shipped only as pellets, or can customers receive powders, films, or dispersions?</li>
+      <li>Can users cut, grind, heat, laser-process, or dissolve the material?</li>
+      <li>What characterization data are available: ICP-OES, FTIR, TGA/DSC, particle size, SEM/EDX, residual solvent?</li>
+      <li>Has TSCA status been confirmed for each component and the final formulation?</li>
+      <li>Are there internal exposure limits, handling protocols, or customer use restrictions?</li>
+    </ol>
+
+    <h2>Suggested Deliverable to Client</h2>
+    <p>For a real engagement, I would return:</p>
+    <ul>
+      <li>Annotated SDS</li>
+      <li>Section-level action log</li>
+      <li>Data request list</li>
+      <li>Technical basis memo</li>
+      <li>Clear separation of technical recommendations from legal/regulatory determinations</li>
+    </ul>
+
+    <div class="scope">
+      <strong>Scope boundary:</strong> This sample is technical compliance support, not legal advice. Final regulatory classification and legal interpretations should be reviewed by qualified counsel or the client responsible party.
+    </div>
+
+    <footer>
+      <span>Samyak Dhole, PhD — Materials Scientist for Technical Documents</span>
+      <a href="mailto:samdhole95@gmail.com?subject=SDS%20review%20inquiry">samdhole95@gmail.com</a>
+    </footer>
+  </div>
+</body>
+</html>
