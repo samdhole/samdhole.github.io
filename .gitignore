@@ -1,4 +1,5 @@
 .chrome-devtools-profile/
+.env
 
 # AI agent config and planning — not for public repo
 CLAUDE.md
@@ -7,4 +8,8 @@ planning/
 ops/
 docs/
 memory/
+
+# gitingest output and local Claude Code settings
+digest.txt
+.claude/settings.local.json
 

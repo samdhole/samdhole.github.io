@@ -1,0 +1,5 @@
+# gitingest-specific exclusions (on top of .gitignore)
+**/CONTEXT.md
+assets/images/
+assets/cv.pdf
+.gitingestignore
