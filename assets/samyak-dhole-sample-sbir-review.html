@@ -1,0 +1,272 @@
+<!doctype html>
+<!--
+@status: active
+@issues: none
+@todo: none
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample SBIR Technical Review, Sam Dhole, PhD</title>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --paper: #fffefa;
+      --ink: #191b1d;
+      --muted: #5f676b;
+      --line: #d8d4c8;
+      --accent: #12605a;
+      --accent-strong: #0d4743;
+      --accent-soft: #dcebe8;
+      --warn: #7a5a15;
+      --max: 860px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 32px;
+      color: var(--accent-strong);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .back:hover { text-decoration: underline; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(18,96,90,0.24);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 5px 10px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.1;
+      margin: 0 0 8px;
+    }
+    .disclaimer {
+      margin: 0 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      border-left: 3px solid var(--line);
+      padding-left: 14px;
+    }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      margin: 40px 0 10px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
+    h3 { font-size: 1rem; margin: 24px 0 6px; }
+    p { margin: 0 0 14px; }
+    ol, ul { padding-left: 20px; margin: 0 0 14px; }
+    li { margin-bottom: 6px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+      margin-bottom: 20px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      background: #f0eee6;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .risk-high { color: #8b2000; font-weight: 700; }
+    .risk-med  { color: var(--warn); font-weight: 700; }
+    .risk-low  { color: var(--muted); }
+    .redline {
+      background: var(--paper);
+      border-left: 3px solid var(--warn);
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      font-size: 0.94rem;
+    }
+    .redline strong { color: var(--warn); }
+    .scope {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.88rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--accent-strong); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../index.html">&larr; samdhole.github.io</a>
+    <span class="badge">Portfolio sample, fictional material</span>
+    <h1>Sample SBIR Technical Review</h1>
+    <p class="disclaimer">This review uses a fictional materials startup concept to demonstrate deliverable style and technical judgment. It is not agency-specific compliance advice and does not reflect any real client or NDA-covered work.</p>
+
+    <h2>Proposal Snapshot</h2>
+    <p><strong>Fictional project:</strong> Scalable perovskite scintillator film for compact X-ray imaging<br>
+    <strong>Agency stage:</strong> Phase I<br>
+    <strong>Claim:</strong> Solution-processed scintillator films can achieve high light yield, low afterglow, and sub-100 &micro;m resolution on a low-cost imaging panel.</p>
+
+    <h2>Review Summary</h2>
+    <p>The concept is plausible but currently under-scoped. The technical plan needs sharper go/no-go metrics, clearer film-thickness and process windows, stronger moisture/oxygen stability testing, and a more defensible comparison against commercial scintillators. The largest reviewer risk is that the proposal overclaims scalability without enough process-control evidence.</p>
+
+    <h2>Strengths</h2>
+    <ul>
+      <li>Strong application need: lower-cost, high-resolution X-ray imaging remains a meaningful market and technical target.</li>
+      <li>Solution processing is a plausible cost advantage if film uniformity and stability are controlled.</li>
+      <li>Proposed optical characterization methods are directionally correct: PL, decay time, light yield proxy, and imaging resolution.</li>
+      <li>A Phase I can reasonably test feasibility if the team narrows the success criteria.</li>
+    </ul>
+
+    <h2>Main Technical Risks</h2>
+    <table>
+      <thead>
+        <tr><th>Risk</th><th>Area</th><th>Issue</th><th>What is needed</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="risk-high">High</td>
+          <td>Film uniformity</td>
+          <td>Proposal mentions &ldquo;large-area coating&rdquo; but does not define acceptable thickness variation, roughness, pinhole density, or batch-to-batch repeatability.</td>
+          <td>Define uniformity targets and measurement method before fabrication begins.</td>
+        </tr>
+        <tr>
+          <td class="risk-high">High</td>
+          <td>Stability</td>
+          <td>Perovskite materials can degrade under moisture, oxygen, heat, and X-ray dose. Current plan lacks explicit accelerated aging and dose-exposure protocols.</td>
+          <td>Add accelerated aging conditions, dose targets, and retained-performance thresholds.</td>
+        </tr>
+        <tr>
+          <td class="risk-med">Medium</td>
+          <td>Resolution vs. light yield tradeoff</td>
+          <td>Thicker films improve absorption but degrade spatial resolution through optical scatter and lateral light spread.</td>
+          <td>Run a thickness sweep with both absorption and MTF/resolution metrics; report tradeoff explicitly.</td>
+        </tr>
+        <tr>
+          <td class="risk-med">Medium</td>
+          <td>Benchmarking</td>
+          <td>Comparison set should include commercial CsI:Tl, GOS, and relevant indirect/direct detector alternatives. Vague &ldquo;better than conventional materials&rdquo; claims will be penalized.</td>
+          <td>Add a benchmark table with specific metrics and measurement conditions for each comparator.</td>
+        </tr>
+        <tr>
+          <td class="risk-low">Low</td>
+          <td>Manufacturability</td>
+          <td>Phase I should not promise manufacturing readiness, but it should define the coating method, substrate size, drying/annealing window, and defect inspection method.</td>
+          <td>Add a process-control section scoped to Phase I feasibility, not production.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Recommended Phase I Milestones</h2>
+
+    <h3>Milestone 1: Formulation downselect</h3>
+    <ul>
+      <li>Screen 3&ndash;5 formulations</li>
+      <li>Metrics: PL intensity, emission wavelength, decay time, visible defects, shelf stability</li>
+      <li>Go/no-go: at least one formulation maintains &gt;80% PL after a defined ambient or controlled aging test</li>
+    </ul>
+
+    <h3>Milestone 2: Thickness and process window</h3>
+    <ul>
+      <li>Coating thickness range: e.g., 25, 50, 100, 200 &micro;m</li>
+      <li>Metrics: thickness uniformity, optical density, surface defects, adhesion</li>
+      <li>Go/no-go: coefficient of variation target and defect-density threshold defined before testing begins</li>
+    </ul>
+
+    <h3>Milestone 3: Imaging proof of concept</h3>
+    <ul>
+      <li>Test pattern imaging under defined X-ray beam conditions</li>
+      <li>Metrics: lp/mm, MTF if available, exposure condition, repeatability</li>
+      <li>Go/no-go: resolution target tied to film thickness and detector geometry</li>
+    </ul>
+
+    <h3>Milestone 4: Stability and dose exposure</h3>
+    <ul>
+      <li>Moisture/oxygen/thermal storage conditions</li>
+      <li>X-ray dose exposure condition</li>
+      <li>Metrics: PL retention, visual degradation, darkening, emission shift</li>
+    </ul>
+
+    <h2>Redline-Style Comments</h2>
+
+    <div class="redline">
+      <strong>&ldquo;High light yield&rdquo;</strong> should be replaced with a measurable target and method. If absolute light yield is not available, state the proxy measurement and the benchmark sample used.
+    </div>
+    <div class="redline">
+      <strong>&ldquo;Scalable&rdquo;</strong> should be limited to a Phase I coating-size claim. Reviewers will expect evidence for uniformity, yield, and process control at the stated scale.
+    </div>
+    <div class="redline">
+      <strong>&ldquo;Low-cost&rdquo;</strong> should be supported by a simple cost driver table: precursor cost, coating method, substrate compatibility, process temperature, encapsulation requirement.
+    </div>
+    <div class="redline">
+      <strong>&ldquo;Stable&rdquo;</strong> should be defined by time, environment, and retained performance. A stability claim without a protocol is not defensible.
+    </div>
+
+    <h2>Suggested Additions to Strengthen the Proposal</h2>
+    <ul>
+      <li>One risk table with mitigation strategy and fallback formulation for each identified risk</li>
+      <li>One benchmark table against CsI:Tl, GOS, and relevant direct-conversion detector alternatives</li>
+      <li>One schematic of the test stack and optical readout geometry</li>
+      <li>One milestone table with quantitative go/no-go criteria for each milestone</li>
+      <li>One commercialization paragraph explaining who would buy the detector and why incumbent materials are insufficient for that application</li>
+    </ul>
+
+    <h2>Suggested Deliverable to Client</h2>
+    <p>For a real SBIR technical review engagement, I would return:</p>
+    <ul>
+      <li>Annotated proposal with inline redline comments</li>
+      <li>Priority risk log (high, medium, low) with recommended resolutions</li>
+      <li>Milestone table with suggested go/no-go criteria</li>
+      <li>Benchmark gap analysis identifying missing comparators</li>
+      <li>Clear separation of technical recommendations from agency-specific strategy or scoring-criteria interpretation</li>
+    </ul>
+
+    <div class="scope">
+      <strong>Scope boundary:</strong> This sample is technical proposal review, not agency-specific compliance advice. Final proposal strategy should be aligned with the specific solicitation, review criteria, and program manager expectations. Regulatory and legal determinations should be reviewed by qualified counsel or the client responsible party.
+    </div>
+
+    <footer>
+      <span>Sam Dhole, PhD, Materials Scientist for Technical Documents</span>
+      <a href="mailto:sam@haloforgelabs.com?subject=SBIR%20review%20inquiry">sam@haloforgelabs.com</a> &middot; <a href="mailto:samdhole95@gmail.com?subject=SBIR%20review%20inquiry">samdhole95@gmail.com</a>
+    </footer>
+  </div>
+</body>
+</html>
