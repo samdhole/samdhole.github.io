@@ -1,0 +1,10 @@
+.chrome-devtools-profile/
+
+# AI agent config and planning — not for public repo
+CLAUDE.md
+AGENTS.md
+planning/
+ops/
+docs/
+memory/
+
