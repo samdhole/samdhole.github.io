@@ -1,0 +1,615 @@
+<!doctype html>
+<!--
+@status: active
+@issues: none
+@todo: none
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bayesian DOE: Multi-Objective QD Synthesis, Sam Dhole, PhD</title>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --paper: #fffefa;
+      --ink: #191b1d;
+      --muted: #5f676b;
+      --line: #d8d4c8;
+      --accent: #12605a;
+      --accent-strong: #0d4743;
+      --accent-soft: #dcebe8;
+      --warn: #7a5a15;
+      --max: 860px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 32px;
+      color: var(--accent-strong);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .back:hover { text-decoration: underline; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(18,96,90,0.24);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 5px 10px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.1;
+      margin: 0 0 8px;
+    }
+    .subtitle {
+      margin: 0 0 32px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      border-left: 3px solid var(--line);
+      padding-left: 14px;
+    }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.3rem;
+      margin: 40px 0 10px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
+    h3 { font-size: 1rem; margin: 24px 0 6px; }
+    p { margin: 0 0 14px; }
+    ol, ul { padding-left: 20px; margin: 0 0 14px; }
+    li { margin-bottom: 6px; }
+    code {
+      background: #eeeae0;
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-size: 0.88em;
+      font-family: "Courier New", monospace;
+    }
+    hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+
+    /* CTA buttons */
+    .cta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+    .btn {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 4px;
+      border: 1.5px solid var(--accent);
+      color: var(--accent-strong);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn:hover { background: var(--accent); color: #fff; text-decoration: none; }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn.primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+
+    /* Parameter table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+      margin-bottom: 20px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      background: #f0eee6;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Round timeline */
+    .rounds { margin-bottom: 20px; }
+    .round {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: 0 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+    .round:last-child { border-bottom: none; }
+    .round-label { font-weight: 700; color: var(--muted); }
+
+    /* Concept / Pareto box */
+    .concept-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      font-size: 0.93rem;
+    }
+    .concept-box strong { display: block; margin-bottom: 4px; color: var(--accent-strong); }
+
+    /* Stack tags */
+    .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .stack span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border-radius: 3px;
+      padding: 3px 9px;
+    }
+
+    /* Limitation items */
+    .limitation { margin-bottom: 10px; }
+    .limitation strong { color: #8b2000; }
+
+    /* Figure */
+    figure { margin: 24px 0; }
+    figure svg { width: 100%; display: block; }
+    figcaption {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    /* Two-column fig row */
+    .fig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+    .fig-row figure { margin: 0; }
+    @media (max-width: 580px) { .fig-row { grid-template-columns: 1fr; } }
+
+    /* Scope boundary */
+    .scope {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.88rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer a { color: var(--accent-strong); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../index.html">&larr; samdhole.github.io</a>
+    <span class="badge">Scientific automation, real campaign</span>
+    <h1>Bayesian DOE: Multi-Objective Perovskite QD Synthesis Optimization</h1>
+    <p class="subtitle">
+      30-experiment DOE campaign using Bayesian optimization to search a 5-parameter space for
+      Mn-doped lead-halide perovskite quantum dot synthesis. Goal: maximize quantum yield and
+      Stokes shift while minimizing absorption edge. Best trade-off cluster found in 4 iterative
+      rounds: APTES ligand + MA cation + low Mn (1&ndash;10 mol%), Stokes shift 203&ndash;209 nm,
+      quantum yield 83&ndash;92%, absorption edge 395&ndash;403 nm. 6 of 30 experiments on the
+      Pareto front.
+    </p>
+
+    <div class="cta-row">
+      <a class="btn primary"
+         href="https://colab.research.google.com/github/samdhole/materials-analysis/blob/main/multiobjective_bo_qd_synthesis.ipynb"
+         target="_blank" rel="noopener">&#9654; Run in Colab</a>
+      <a class="btn"
+         href="https://github.com/samdhole/materials-analysis/blob/main/multiobjective_bo_qd_synthesis.ipynb"
+         target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+
+    <h2>The Problem</h2>
+    <p>
+      The target material is Mn-doped lead-halide perovskite quantum dots embedded in a PMMA
+      polymer matrix, a scintillator designed for dual-readout calorimetry. Dual-readout
+      calorimetry is a particle physics detector technique that measures both Cherenkov radiation
+      (ultra-fast UV photons) and scintillation (slower visible-light emission) from the same
+      event, then separates them by timing to reconstruct the original particle energy more
+      accurately.
+    </p>
+    <p>
+      The synthesis route is mechano-chemical ball milling. Milling cuts per-batch time from
+      ~1 day to 30&ndash;45 minutes and enables rapid screening, but opens a 5-coupled-parameter
+      space (2 categorical, 3 continuous) where a full factorial design would require hundreds of
+      experiments. The goal: maximize Stokes shift (a 200+ nm gap between UV absorption and
+      orange emission prevents the composite from reabsorbing its own scintillation output),
+      maximize quantum yield, and minimize absorption edge wavelength, using as few synthesis
+      runs as possible.
+    </p>
+
+    <h2>Parameter Space</h2>
+    <table>
+      <thead>
+        <tr><th>Parameter</th><th>Type</th><th>Range / Options</th><th>Physical meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Capping Ligand</td>
+          <td>Categorical</td>
+          <td>Oleylamine, Octylamine, APTES</td>
+          <td>Organic molecules coating nanocrystal surfaces; controls size, solubility, and surface defect density</td>
+        </tr>
+        <tr>
+          <td>A-Site Cation</td>
+          <td>Categorical</td>
+          <td>Cs, PEA, MA</td>
+          <td>Positively charged ion in the ABX&#x2083; perovskite lattice (Cs = cesium, PEA = phenethylammonium, MA = methylammonium); governs crystal symmetry, stability, and emission lifetime</td>
+        </tr>
+        <tr>
+          <td>Mn&#xB2;&#x207A; Doping</td>
+          <td>Continuous</td>
+          <td>1&ndash;50 mol%</td>
+          <td>Manganese dopant concentration; creates an energy transfer pathway that red-shifts emission and enlarges the Stokes shift</td>
+        </tr>
+        <tr>
+          <td>X Composition</td>
+          <td>Continuous</td>
+          <td>0&ndash;1 (halide ratio)</td>
+          <td>Chloride-to-bromide ratio (0 = all Br, 1 = all Cl); higher Cl widens the bandgap and blue-shifts the spectrum</td>
+        </tr>
+        <tr>
+          <td>Milling Time</td>
+          <td>Continuous</td>
+          <td>3&ndash;20 min</td>
+          <td>Duration of mechanical grinding; longer milling produces smaller particles with altered optical properties and reaction yield</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Approach</h2>
+    <p>
+      <strong>Step 1: Latin Hypercube Sampling (LHS).</strong> LHS divides each parameter's range
+      into equal intervals and places exactly one sample per interval, giving uniform coverage
+      across the full parameter space without testing every combination. 15 initial conditions
+      were generated before the surrogate model had any data.
+    </p>
+    <p>
+      <strong>Step 2: Bayesian optimization loop.</strong> After each batch of measurements, a
+      Gaussian process surrogate updates its prediction surface. The q-NEHVI acquisition function
+      (Noisy Expected Hypervolume Improvement) selects the next batch of 5 conditions to run,
+      scoring candidates by how much they are expected to expand the Pareto front.
+    </p>
+    <p>
+      <strong>Step 3: Pareto front identification.</strong> The Pareto front is the set of
+      experiments where no other tested condition is better on all three objectives simultaneously.
+      Non-dominated solutions were extracted across all 30 experiments and visualized in 3D
+      (Stokes shift &times; quantum yield &times; absorption edge).
+    </p>
+
+    <!-- FLOWCHART — fixed: viewBox widened to 720 to prevent right-side loop label overflow -->
+    <figure>
+      <svg viewBox="0 0 720 580" xmlns="http://www.w3.org/2000/svg"
+           style="width:100%; display:block; background:#fafbfc; border-radius:6px; border:1px solid var(--line);"
+           role="img" aria-label="Bayesian optimization loop flowchart for QD synthesis campaign">
+        <defs>
+          <marker id="fc-a" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#666"/>
+          </marker>
+          <marker id="fc-l" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#12605a"/>
+          </marker>
+        </defs>
+
+        <!-- title -->
+        <text x="350" y="18" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="12" font-weight="700" fill="#333">Bayesian Optimization Loop &mdash; 30-Experiment QD Synthesis Campaign</text>
+
+        <!-- START -->
+        <ellipse cx="350" cy="38" rx="62" ry="17" fill="#444"/>
+        <text x="350" y="43" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="12" font-weight="700" fill="#fff">START</text>
+        <line x1="350" y1="55" x2="350" y2="61" stroke="#666" stroke-width="1.5" marker-end="url(#fc-a)"/>
+
+        <!-- 1: LHS -->
+        <rect x="140" y="62" width="420" height="52" rx="6" fill="#dcebe8" stroke="#12605a" stroke-width="1.5"/>
+        <text x="350" y="82" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="13" font-weight="700" fill="#0d4743">Begin: 15 varied starting conditions</text>
+        <text x="350" y="100" text-anchor="middle" font-family="'Courier New',monospace"
+              font-size="10" fill="#12605a">LatinHypercube(d=5, n=15) &mdash; space-filling, no prior data</text>
+        <line x1="350" y1="114" x2="350" y2="121" stroke="#666" stroke-width="1.5" marker-end="url(#fc-a)"/>
+
+        <!-- 2: Synthesize (orange) — loop returns here at right edge x=560, cy=155 -->
+        <rect x="140" y="122" width="420" height="66" rx="6" fill="#fde8d8" stroke="#d4621a" stroke-width="2"/>
+        <text x="350" y="143" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="13" font-weight="700" fill="#7a3010">Run batch &middot; measure 3 optical properties</text>
+        <text x="350" y="159" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="10" fill="#a0501a">Ball mill &middot; 30&ndash;45 min &middot; 3 compositions per batch</text>
+        <text x="350" y="175" text-anchor="middle" font-family="'Courier New',monospace"
+              font-size="10" fill="#a0501a">Stokes shift &middot; QY &middot; absorption edge &rarr; add_measurements()</text>
+        <line x1="350" y1="188" x2="350" y2="195" stroke="#666" stroke-width="1.5" marker-end="url(#fc-a)"/>
+
+        <!-- 3: GP Update -->
+        <rect x="140" y="196" width="420" height="62" rx="6" fill="#dcebe8" stroke="#12605a" stroke-width="1.5"/>
+        <text x="350" y="216" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="13" font-weight="700" fill="#0d4743">Algorithm maps the landscape from all data</text>
+        <text x="350" y="232" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="10" fill="#12605a">Gaussian process builds a prediction surface &mdash;</text>
+        <text x="350" y="247" text-anchor="middle" font-family="'Courier New',monospace"
+              font-size="10" fill="#12605a">shows where results look good AND where uncertainty is highest</text>
+        <line x1="350" y1="258" x2="350" y2="265" stroke="#666" stroke-width="1.5" marker-end="url(#fc-a)"/>
+
+        <!-- 4: Recommend -->
+        <rect x="140" y="266" width="420" height="52" rx="6" fill="#dcebe8" stroke="#12605a" stroke-width="1.5"/>
+        <text x="350" y="286" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="13" font-weight="700" fill="#0d4743">Pick 5 most promising untested conditions</text>
+        <text x="350" y="304" text-anchor="middle" font-family="'Courier New',monospace"
+              font-size="10" fill="#12605a">recommend(batch_size=5) &middot; qLogNParEGO acquisition</text>
+        <line x1="350" y1="318" x2="350" y2="330" stroke="#666" stroke-width="1.5" marker-end="url(#fc-a)"/>
+
+        <!-- DECISION diamond: center (350,360), half-w=158, half-h=30 -->
+        <polygon points="350,330 508,360 350,390 192,360"
+                 fill="#fffbe0" stroke="#c8920a" stroke-width="1.5"/>
+        <text x="350" y="357" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="12" font-weight="700" fill="#7a5800">Another synthesis round?</text>
+        <text x="350" y="373" text-anchor="middle" font-family="'Courier New',monospace"
+              font-size="10" fill="#9a7000">rounds 1&ndash;3 &rarr; Yes &middot; after round 3 &rarr; No</text>
+
+        <!-- YES / NO labels -->
+        <text x="516" y="353" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#12605a">Yes</text>
+        <text x="360" y="410" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#555">No (n = 30)</text>
+
+        <!-- loop arrow: right of diamond (508,360) → x=590 → up to y=155 → left to Synthesize right edge (560,155) -->
+        <path d="M 508,360 L 590,360 L 590,155 L 560,155"
+              fill="none" stroke="#12605a" stroke-width="1.5" stroke-dasharray="5,3"
+              marker-end="url(#fc-l)"/>
+        <text x="598" y="247" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#12605a">Rounds</text>
+        <text x="598" y="261" font-family="Arial,sans-serif" font-size="10" fill="#12605a">1 &rarr; 2 &rarr; 3</text>
+        <text x="598" y="275" font-family="Arial,sans-serif" font-size="10" fill="#12605a">n: 20&rarr;25&rarr;30</text>
+
+        <!-- Arrow: NO down to Pareto -->
+        <line x1="350" y1="390" x2="350" y2="416" stroke="#666" stroke-width="1.5" marker-end="url(#fc-a)"/>
+
+        <!-- 5: Pareto (green) -->
+        <rect x="140" y="418" width="420" height="64" rx="6" fill="#d8f0e0" stroke="#2a7a3c" stroke-width="1.5"/>
+        <text x="350" y="438" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="13" font-weight="700" fill="#1a4a26">Identify the best-tradeoff conditions</text>
+        <text x="350" y="454" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="10" fill="#2d6035">No other experiment beats these on all 3 objectives simultaneously</text>
+        <text x="350" y="469" text-anchor="middle" font-family="'Courier New',monospace"
+              font-size="10" fill="#2d6035">pareto_front() &rarr; 6 / 30 experiments non-dominated</text>
+        <line x1="350" y1="482" x2="350" y2="490" stroke="#666" stroke-width="1.5" marker-end="url(#fc-a)"/>
+
+        <!-- 6: Viz -->
+        <rect x="140" y="491" width="420" height="52" rx="6" fill="#d8f0e0" stroke="#2a7a3c" stroke-width="1.5"/>
+        <text x="350" y="511" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="13" font-weight="700" fill="#1a4a26">3D map + synthesis report</text>
+        <text x="350" y="529" text-anchor="middle" font-family="'Courier New',monospace"
+              font-size="10" fill="#2d6035">Plotly scatter_3d &middot; red &#9670; = Pareto-optimal front</text>
+        <line x1="350" y1="543" x2="350" y2="551" stroke="#666" stroke-width="1.5" marker-end="url(#fc-a)"/>
+
+        <!-- END -->
+        <ellipse cx="350" cy="566" rx="62" ry="17" fill="#444"/>
+        <text x="350" y="571" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="12" font-weight="700" fill="#fff">END</text>
+
+        <!-- LEGEND -->
+        <rect x="14" y="490" width="106" height="80" rx="4" fill="white" stroke="#d8d4c8" stroke-width="1"/>
+        <text x="67" y="504" text-anchor="middle" font-family="Arial,sans-serif"
+              font-size="9" font-weight="700" fill="#666">LEGEND</text>
+        <rect x="22" y="510" width="12" height="10" rx="2" fill="#fde8d8" stroke="#d4621a" stroke-width="1"/>
+        <text x="40" y="519" font-family="Arial,sans-serif" font-size="9" fill="#555">Lab / synthesis</text>
+        <rect x="22" y="526" width="12" height="10" rx="2" fill="#dcebe8" stroke="#12605a" stroke-width="1"/>
+        <text x="40" y="535" font-family="Arial,sans-serif" font-size="9" fill="#555">Algorithm step</text>
+        <rect x="22" y="542" width="12" height="10" rx="2" fill="#d8f0e0" stroke="#2a7a3c" stroke-width="1"/>
+        <text x="40" y="551" font-family="Arial,sans-serif" font-size="9" fill="#555">Output / results</text>
+        <line x1="22" y1="563" x2="34" y2="563" stroke="#12605a" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="40" y="567" font-family="Arial,sans-serif" font-size="9" fill="#555">Optimization loop</text>
+      </svg>
+      <figcaption>
+        <strong>How the campaign works:</strong> Start with 15 experiments spread evenly across
+        the parameter space. Then loop: synthesize a batch, measure three properties, the
+        algorithm learns which regions look promising, it recommends the next 5 most informative
+        conditions. After 3 loops (30 experiments total), extract the Pareto front. Green =
+        algorithm steps; orange = lab work; blue-green = outputs.
+      </figcaption>
+    </figure>
+
+    <div class="rounds">
+      <div class="round">
+        <span class="round-label">LHS</span>
+        <span>15 initial experiments, space-filling design, no prior data</span>
+      </div>
+      <div class="round">
+        <span class="round-label">Round 1</span>
+        <span>5 experiments. Surrogate trained on 15 points. With limited data the model is uncertain, so early recommendations explore more broadly.</span>
+      </div>
+      <div class="round">
+        <span class="round-label">Round 2</span>
+        <span>5 experiments. Surrogate stabilizing. MA (methylammonium) A-site cation + low Mn doping region beginning to concentrate on the Pareto front.</span>
+      </div>
+      <div class="round">
+        <span class="round-label">Round 3</span>
+        <span>5 experiments. Low Mn doping + long milling confirmed as Pareto-optimal cluster: no other conditions beat this region on all three objectives.</span>
+      </div>
+      <div class="round">
+        <span class="round-label">Round 4</span>
+        <span>5 recommended from the 30-experiment surrogate, now well-calibrated.</span>
+      </div>
+    </div>
+
+    <div class="fig-row">
+      <figure>
+        <svg viewBox="0 0 240 155" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%; border-radius:4px; display:block; border:1px solid var(--line);"
+             aria-label="Mechano-chemical batch mill schematic">
+          <defs>
+            <linearGradient id="mill-body" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#b0b8c4"/>
+              <stop offset="100%" stop-color="#606878"/>
+            </linearGradient>
+          </defs>
+          <rect width="240" height="155" fill="#f0eee6" rx="4"/>
+          <text x="120" y="16" text-anchor="middle" font-size="9" font-weight="700"
+                fill="#5f676b" font-family="Arial,sans-serif">Mechano-chemical ball mill</text>
+          <!-- mill drum -->
+          <ellipse cx="120" cy="80" rx="60" ry="50" fill="url(#mill-body)" stroke="#444" stroke-width="2"/>
+          <ellipse cx="120" cy="80" rx="60" ry="12" fill="#888" stroke="#444" stroke-width="1" opacity="0.6"/>
+          <!-- balls inside -->
+          <circle cx="100" cy="78" r="8" fill="#ccc" stroke="#888" stroke-width="1"/>
+          <circle cx="120" cy="90" r="8" fill="#ccc" stroke="#888" stroke-width="1"/>
+          <circle cx="140" cy="74" r="8" fill="#ccc" stroke="#888" stroke-width="1"/>
+          <!-- lid -->
+          <rect x="64" y="31" width="112" height="10" rx="4" fill="#9098a8" stroke="#444" stroke-width="1"/>
+          <!-- axis -->
+          <line x1="8" y1="80" x2="64" y2="80" stroke="#666" stroke-width="3"/>
+          <line x1="176" y1="80" x2="232" y2="80" stroke="#666" stroke-width="3"/>
+          <circle cx="8" cy="80" r="5" fill="#555"/>
+          <circle cx="232" cy="80" r="5" fill="#555"/>
+          <!-- label -->
+          <text x="120" y="142" text-anchor="middle" font-size="9"
+                fill="#5f676b" font-family="Arial,sans-serif">3 compositions &middot; 30&ndash;45 min/batch</text>
+        </svg>
+        <figcaption>
+          Mechano-chemical batch mill. Three compositions in 30&ndash;45 min vs. ~1 day per
+          composition by hot-injection. The throughput that makes iterative DOE feasible at
+          the bench.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <svg viewBox="0 0 240 155" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%; border-radius:4px; display:block;"
+             aria-label="Three QD synthesis samples glowing orange under UV">
+          <defs>
+            <radialGradient id="vg" cx="50%" cy="55%" r="60%">
+              <stop offset="0%"   stop-color="#ffb830"/>
+              <stop offset="100%" stop-color="#b85000"/>
+            </radialGradient>
+            <filter id="vblur" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="8"/>
+            </filter>
+          </defs>
+          <rect width="240" height="155" fill="#0d1520" rx="4"/>
+          <rect x="40" y="28" width="160" height="85" rx="12" fill="#ff8800"
+                opacity="0.11" filter="url(#vblur)"/>
+          <rect x="24" y="18" width="192" height="8" rx="4" fill="#6644cc"/>
+          <text x="120" y="14" text-anchor="middle" font-size="8"
+                fill="#9977ee" font-family="Arial,sans-serif">UV 365 nm</text>
+          <rect x="50"  y="36" width="36" height="74" rx="6" fill="url(#vg)"/>
+          <rect x="50"  y="24" width="36" height="15" rx="4" fill="#2255aa"/>
+          <rect x="111" y="36" width="36" height="74" rx="6" fill="url(#vg)"/>
+          <rect x="111" y="24" width="36" height="15" rx="4" fill="#2255aa"/>
+          <rect x="172" y="36" width="36" height="74" rx="6" fill="url(#vg)"/>
+          <rect x="172" y="24" width="36" height="15" rx="4" fill="#2255aa"/>
+          <rect x="14" y="110" width="212" height="3" rx="1.5" fill="#2d3748"/>
+          <text x="120" y="126" text-anchor="middle" font-size="9"
+                fill="#9ca3af" font-family="Arial,sans-serif">3 samples per batch &middot; 30&ndash;45 min</text>
+          <text x="120" y="140" text-anchor="middle" font-size="9"
+                fill="#9ca3af" font-family="Arial,sans-serif">Mn&#xB2;&#x207A; energy transfer &rarr; orange emission</text>
+        </svg>
+        <figcaption>
+          Three QD-PMMA samples from one milling batch, each glowing orange under UV.
+          Mn&#xB2;&#x207A; dopant energy transfer active across all compositions.
+        </figcaption>
+      </figure>
+    </div>
+
+    <h2>What the Pareto Front Shows</h2>
+    <div class="concept-box">
+      <strong>Non-dominated solutions: 6 of 30 experiments</strong>
+      A point is Pareto-optimal if no other experiment beats it on all three objectives
+      simultaneously. These are the synthesis conditions worth running at scale. The front shows
+      that high Stokes shift and high quantum yield are cooperatively achievable. Best trade-off
+      cluster (APTES/MA, Mn 1&ndash;10 mol%): <strong>Stokes shift 203&ndash;209 nm &middot;
+      quantum yield 83&ndash;92% &middot; absorption edge 395&ndash;403 nm</strong>. Best single
+      quantum yield observed: 94% (Octylamine/MA).
+    </div>
+    <p>
+      The MA A-site cation + APTES ligand + low Mn doping (1&ndash;10 mol%) holds 3 of 6
+      Pareto-optimal experiments, a region the initial LHS sampled only sparsely. Bayesian
+      optimization identified it within rounds 2&ndash;3. Random or grid search would have
+      required substantially more experiments to find it.
+    </p>
+
+    <h2>Stack</h2>
+    <div class="stack">
+      <span>Python</span><span>NumPy</span><span>SciPy</span><span>pandas</span>
+      <span>BayBE</span><span>BoTorch</span><span>GPyTorch</span><span>Plotly</span>
+    </div>
+    <p>
+      BayBE (Merck KGaA's open-source Bayesian optimization framework for lab automation) wraps
+      BoTorch and GPyTorch via <code>BotorchRecommender</code>. The mixed search space requires
+      <code>SearchSpace.from_product</code>, which handles categorical parameters (ligand, cation)
+      via one-hot encoding alongside continuous ranges. q-NEHVI was chosen over EHI because batch
+      size &gt; 1 and measurements have realistic noise.
+    </p>
+
+    <h2>Tradeoffs and Limitations</h2>
+    <p class="limitation"><strong>Measurement data is illustrative.</strong>
+      In a real campaign, synthesis runs happen between each <code>recommend()</code> call.
+      The notebook uses pre-generated results with matching statistical structure to demonstrate
+      the loop end-to-end. Real experimental turnaround adds 1&ndash;5 days between rounds
+      depending on characterization throughput.
+    </p>
+    <p class="limitation"><strong>GP cold-start.</strong>
+      15 points across 5 parameters is thin. Rounds 1&ndash;2 recommendations are noisier than
+      Rounds 3&ndash;4 as the model accumulates data. A 20&ndash;25 point LHS would reduce
+      early-round noise at modest experimental cost.
+    </p>
+    <p class="limitation"><strong>No synthesis feasibility constraints.</strong>
+      Ligand/cation incompatibilities and solubility limits are not encoded in the search space.
+      Recommended conditions should be checked for physical feasibility before synthesis.
+    </p>
+    <p class="limitation"><strong>Acquisition function cost.</strong>
+      q-NEHVI becomes computationally expensive for large Pareto fronts or more than 3 objectives.
+      For scaled campaigns, q-NParEGO is a faster alternative using random scalarization.
+    </p>
+
+    <hr>
+
+    <div class="cta-row">
+      <a class="btn primary"
+         href="https://colab.research.google.com/github/samdhole/materials-analysis/blob/main/multiobjective_bo_qd_synthesis.ipynb"
+         target="_blank" rel="noopener">&#9654; Run in Colab</a>
+      <a class="btn"
+         href="https://github.com/samdhole/materials-analysis/blob/main/multiobjective_bo_qd_synthesis.ipynb"
+         target="_blank" rel="noopener">View on GitHub</a>
+      <a class="btn" href="mailto:sam@haloforgelabs.com?subject=Scientific%20automation%20inquiry">Contact Sam</a>
+    </div>
+
+    <div class="scope">
+      <strong>Scope note:</strong> Parameter ranges, objective bounds, and Pareto front values
+      are grounded in the real perovskite QD synthesis campaign. The notebook uses synthetic
+      measurement data with matching statistical structure to demonstrate the campaign loop
+      without reproducing raw experimental records.
+    </div>
+
+    <footer>
+      <span>Sam Dhole, PhD, Materials Scientist for Technical Documents</span>
+      <a href="mailto:sam@haloforgelabs.com?subject=Scientific%20automation%20inquiry">sam@haloforgelabs.com</a> &middot; <a href="mailto:samdhole95@gmail.com?subject=Scientific%20automation%20inquiry">samdhole95@gmail.com</a>
+    </footer>
+  </div>
+</body>
+</html>
