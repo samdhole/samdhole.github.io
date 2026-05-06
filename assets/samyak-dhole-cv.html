@@ -1,0 +1,426 @@
+<!doctype html>
+<!--
+@status: active
+@issues: none
+@todo: none
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV — Sam Dhole, Ph.D.</title>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --paper: #fffefa;
+      --ink: #191b1d;
+      --muted: #5f676b;
+      --line: #d8d4c8;
+      --accent: #12605a;
+      --accent-strong: #0d4743;
+      --accent-soft: #dcebe8;
+      --max: 860px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.97rem;
+      line-height: 1.55;
+    }
+    .page-bar {
+      background: var(--accent-strong);
+      color: #fff;
+      padding: 12px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.88rem;
+    }
+    .page-bar a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+    }
+    .page-bar a:hover { text-decoration: underline; }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      color: var(--accent-strong) !important;
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none !important;
+    }
+    .dl-btn:hover { opacity: 0.9; }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    /* Header */
+    .cv-header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .cv-header h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.1rem;
+      margin: 0 0 6px;
+      letter-spacing: 0.01em;
+    }
+    .cv-header .tagline {
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin: 0 0 10px;
+    }
+    .cv-header .contact {
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 4px 16px;
+    }
+    .cv-header .contact a { color: var(--accent-strong); text-decoration: none; }
+    .cv-header .contact a:hover { text-decoration: underline; }
+    /* Sections */
+    h2 {
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      margin: 32px 0 14px;
+    }
+    /* Experience entries */
+    .entry { margin-bottom: 22px; }
+    .entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .entry-head strong { font-size: 1.02rem; }
+    .entry-head .loc-date { color: var(--muted); font-size: 0.9rem; white-space: nowrap; }
+    .entry-sub {
+      font-style: italic;
+      color: var(--muted);
+      margin: 2px 0 8px;
+      font-size: 0.92rem;
+    }
+    .project-head {
+      font-weight: 700;
+      margin: 14px 0 2px;
+    }
+    .project-sub {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0 0 6px;
+    }
+    ul {
+      margin: 0 0 8px;
+      padding-left: 20px;
+    }
+    li { margin-bottom: 4px; }
+    /* Education table */
+    .edu-entry { margin-bottom: 14px; }
+    .edu-entry .edu-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .edu-entry .edu-head strong { font-size: 1rem; }
+    .edu-entry .edu-meta { color: var(--muted); font-size: 0.9rem; margin-top: 2px; }
+    /* Skills */
+    .skill-block { margin-bottom: 8px; }
+    .skill-block strong { color: var(--ink); }
+    /* Publications */
+    .pub-group { margin-bottom: 14px; }
+    .pub-group h3 { font-size: 0.92rem; font-weight: 700; margin: 0 0 6px; }
+    .pub-group ul { margin: 0; }
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 32px;
+    }
+    .services-grid h3 { font-size: 0.95rem; font-weight: 700; margin: 14px 0 6px; }
+    @media (max-width: 600px) {
+      .entry-head, .edu-entry .edu-head { flex-direction: column; }
+      .services-grid { grid-template-columns: 1fr; }
+      .cv-header .contact { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-bar">
+    <a href="../index.html">← samyakdhole.com</a>
+    <a class="dl-btn" href="cv.pdf" download>&#8595; Download PDF</a>
+  </div>
+  <div class="wrap">
+
+    <div class="cv-header">
+      <h1>Sam Dhole, Ph.D.</h1>
+      <p class="tagline">Materials Scientist — Radiation Detection — Chemical Regulatory Compliance — Lab Automation</p>
+      <div class="contact">
+        <a href="mailto:samdhole95@gmail.com">samdhole95@gmail.com</a>
+        <span>+1 (716) 603-1384</span>
+        <a href="https://scholar.google.com/citations?user=ILe-yiQAAAAJ" target="_blank" rel="noopener">Google Scholar (300+ citations)</a>
+        <a href="https://www.linkedin.com/in/sam-d-0135b0130/" target="_blank" rel="noopener">LinkedIn</a>
+        <span>Remote Consulting — US &amp; International</span>
+      </div>
+    </div>
+
+    <h2>Professional Summary</h2>
+    <p>Ph.D. Materials Scientist with 8+ years of R&amp;D experience spanning academic research and industrial product development. Led multiple DOE SBIR projects from Phase I through Phase II at CapeSym Inc., delivering prototype radiation detectors for medical imaging, nuclear physics, and homeland security applications. Deep expertise in perovskite and quantum dot materials, thin film deposition, optical/electrical characterization, and scientific automation (Python, LabVIEW, MATLAB). Dual undergraduate degrees in Chemistry and Electronics &amp; Instrumentation provide cross-domain fluency from wet-bench synthesis to hardware integration to data science.</p>
+    <p><strong>Core competencies:</strong> DOE SBIR project execution — Materials characterization (XRD, SEM, FTIR, Raman, PL, UV-Vis) — Thin film fabrication (PVD, solution processing) — Lab automation &amp; data pipelines — Chemical regulatory compliance (TSCA, CEPA, GHS/SDS) — Technical documentation &amp; proposal writing</p>
+
+    <h2>Professional Experience</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <strong>Haloforge Labs — Independent Consultant</strong>
+        <span class="loc-date">Remote — Nov 2025–present</span>
+      </div>
+      <p class="entry-sub">Advanced materials and specialty chemical consulting for R&amp;D teams, startups, and investors.</p>
+      <ul>
+        <li>GHS/HazCom technical review: SDS authoring and hazard classification for advanced materials (perovskites, quantum dots, specialty chemicals, nanomaterials)</li>
+        <li>SBIR/STTR technical red-team: proposal critique, milestone feasibility review, and progress report drafting for DOE and other federal programs</li>
+        <li>Materials characterization interpretation: XRD, SEM/EDX, spectroscopy data analysis and client-ready reporting</li>
+        <li>Technical documentation: risk memos, literature reviews, and experimental plans for deeptech and early-stage materials companies</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <strong>CapeSym, Inc. — Scientist</strong>
+        <span class="loc-date">Natick, MA — 2022–2025</span>
+      </div>
+      <p class="entry-sub">Small R&amp;D company (11–50 employees) developing novel materials, sensors, and instruments for radiation detection. PI/Supervisor: Amlan Datta, Senior Scientist &amp; R&amp;D Principal Investigator.</p>
+
+      <p class="project-head">DOE SBIR Project 1: Low-Cost Pixelated X-Ray Imager</p>
+      <p class="project-sub">Phase I + II — Contract DE-SC0022472 — 2022–2025</p>
+      <ul>
+        <li>Lead scientist on MAPI (MAPbI₃) thick-film direct-conversion X-ray detector development</li>
+        <li>Fabricated detectors on two a-Si:H active pixel array sizes: 3.5×3.5 cm (150 µm pixels) and 10×10 cm</li>
+        <li>Achieved X-ray sensitivity of 1.6×10⁵ µC Gy⁻¹ A⁻¹ — highest S/√J ratio in published MAPI literature at time</li>
+        <li>Dark current: 0.5 nA/cm² at 50V bias; stable 60 days in ambient atmosphere without encapsulation</li>
+        <li>Developed 3 novel fabrication processes: (1) methylamine gas recrystallization, (2) TMPTA polymer crosslinking + soft-pressing, (3) MAPI-polyimide composite hole blocking layer</li>
+        <li><strong>Outcome:</strong> Clinched Phase II funding; technology advancing toward medical X-ray imaging prototype</li>
+      </ul>
+
+      <p class="project-head">DOE SBIR Project 2: High Spatial Resolution Detectors for Nuclear Physics</p>
+      <p class="project-sub">Phase I + II — Contract DE-SC0023561 — 2022–2026</p>
+      <ul>
+        <li>Developed MP-OGS (Microcapillary Plate + Organic Glass Scintillator) particle tracking detectors</li>
+        <li>Phase I: Fabricated crack-free MP-OGS in 100 µm and 20 µm pore sizes; achieved 2.45 ns decay time, PSD FoM = 2.8 (gamma/neutron separation)</li>
+        <li>Designed CapeSym SiPM readout PCB (128-channel S13552 array, 230 µm pitch) with custom 9V low-ripple power supply</li>
+        <li>Phase II: Pivoted to NP-OGS nanoguide format; achieved <strong>5 lp/mm spatial resolution</strong> — exceeding 2× the theoretical 230 µm SiPM limit</li>
+        <li>Built advanced qCMOS imaging system (Hamamatsu Orca Quest): tracked individual electrons (28 µm trajectory, 0–4 photon counting)</li>
+        <li>Designed complete optical system in OpenSCAD: lens adapters, sample holders, camera mounts, mirror holders for beamline deployment</li>
+        <li>Scale-up: demonstrated 100×100 mm NP-Plastic commercial scalability</li>
+        <li>Collaborators: Sandia National Labs, Fermilab, University of Tennessee, FRIB, LANSCE</li>
+      </ul>
+
+      <p class="project-head">DOE SBIR Project 3: High QE Scintillators for Dual Readout Calorimetry</p>
+      <p class="project-sub">Phase I — Contract DE-SC0024780 — Feb–Nov 2024</p>
+      <ul>
+        <li>Synthesized CZSM (Mn-doped Cd₀.₂Zn₀.₈S/ZnS core-shell) quantum dots via hot injection Schlenk line</li>
+        <li>Achieved <strong>250 nm Stokes shift</strong> (excitation 340 nm → emission 590 nm) — tunable via Cd:Zn ratio</li>
+        <li>Created QD-PMMA composites at up to 25 wt% loading with maintained optical transparency</li>
+        <li>Demonstrated simultaneous Cerenkov + scintillation detection with temporal and wavelength separation</li>
+        <li>Screened 4 QD systems; developed surface modification protocols for polymer matrix compatibility</li>
+        <li>Collaborator: James Freeman, Fermilab</li>
+      </ul>
+
+      <p class="project-head">DHS-CWMD Project: Engineered Scintillator Ceramics</p>
+      <p class="project-sub">Contracts 70RWMD23C0000017/18 — Jul 2023–2025</p>
+      <ul>
+        <li>Developed Cs₂HfCl₆ (CHC) ceramic scintillator powder for dual gamma/neutron detection</li>
+        <li>All CHC powder synthesis at CapeSym: dry, wet (toluene), and cryogenic (liquid N₂) ball milling</li>
+        <li>Particle size control: 9–130 µm (various sieve meshes); multiple batches shipped to UCF for sintering</li>
+        <li>Li:CHC (neutron-sensitized) and SrI₂ powders also processed</li>
+        <li>Characterization by LBNL (Dr. Federico Moretti)</li>
+      </ul>
+
+      <p class="project-head">Predecessor Project: Synchrotron X-ray Detectors (DE-SC0019658)</p>
+      <p class="project-sub">Phase II Report #6 co-author — Jul–Dec 2022</p>
+      <ul>
+        <li>Executed full MAPI synthesis + fabrication pipeline: ACN/2-ME/GBL solvent system, automated blade coating</li>
+        <li>Developed PI-MAPI composite hole blocking layer + MA gas treatment system (custom Ar/MA rotameter glovebox)</li>
+        <li>Achieved record S/√J = 2.07×10⁸ µC Gy⁻¹ cm⁻¹ A⁻¹/² — highest published at time</li>
+        <li>&gt;95% deposition uniformity over large area; 90-day ambient stability</li>
+      </ul>
+
+      <p class="project-head">Other CapeSym Contributions</p>
+      <ul>
+        <li>Parylene encapsulation (2 µm Parylene-C, Labcoter system); metallic contact deposition (Ag, Au, ITO)</li>
+        <li>Custom argon glovebox protocols (&lt;2 ppm O₂, &lt;1 ppm H₂O) for moisture-sensitive perovskites</li>
+        <li>Co-authored and sole-authored DOE quarterly progress reports across all projects</li>
+        <li>Coordinated with external partners (Hamamatsu, SNL, Fermilab) for testing and component qualification</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <strong>Los Alamos National Laboratory — Graduate Student Guest</strong>
+        <span class="loc-date">CINT — 2021–2022</span>
+      </div>
+      <p class="entry-sub">Host: Dr. Wanyi Nie, Center for Integrated Nanotechnologies (CINT).</p>
+      <ul>
+        <li><strong>First slot-die deposition of MAPbI₃ thick films:</strong> Selected 2-methoxyethanol (bp 124°C, donor number 20 kcal/mol) to avoid solvent trapping endemic to DMF/DMSO in thick films; layer-by-layer scheme (prenucleation seed + thick layer) yielded 80–130 µm films with 59% large crystal domains</li>
+        <li>Generalized process to lead-free MA₃Bi₂I₉ (bismuth halide): optimized single-layer 40 µm and two-layer 70 µm compact films; resistivity 2.31×10⁶ Ω·cm</li>
+        <li>Built portable environmental chamber for in-situ electrical measurements under humid CO₂</li>
+        <li>Characterized films via SEM, XRD, Raman, PL, UV-Vis; Rutherford backscattering spectrometry (RBS, 2.3 MeV ⁴He⁺) for quantitative stoichiometry at LANL NEC Pelletron</li>
+        <li>Mentored undergraduate intern on photovoltaic device measurement</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <strong>University at Buffalo — Graduate Research Assistant</strong>
+        <span class="loc-date">Buffalo, NY — 2019–2022</span>
+      </div>
+      <p class="entry-sub">Advisor: Prof. Quanxi Jia. GPA 3.967/4.000.</p>
+      <ul>
+        <li>Operated and managed High-Resolution XRD user facility (X'Pert PANalytical MRD PRO, Rigaku Ultima III); trained users and maintained equipment</li>
+        <li>Established wet chemistry laboratory from scratch (purchasing, chemical inventory, safety protocols, OSHA compliance)</li>
+        <li><strong>Polymer Assisted Deposition (PAD):</strong> Pioneered first aqueous chemical solution route for chalcogenide perovskite BaZrS₃ — 83 nm films on c-plane sapphire; Ba:Zr:S = 1.00:0.93:3.02 (RBS); PL peak 1.81 eV; Efros-Shklovskii variable range hopping transport confirmed; extended to Ba₃Zr₂S₇ (Ruddleson-Popper 2D) and SrZrS₃ on LaAlO₃ → <em>Photonics 2023</em> publication</li>
+        <li><strong>Resistive Switching:</strong> Elucidated Schottky emission mechanism in Na₀.₅Bi₀.₅TiO₃ (NBT) memristors: mobile oxygen vacancy dynamics control ON/OFF ratio (~11,000 at 600°C); designed MIM test structures (photolithography + PVD); also studied HfO₂:CeO₂ charge transport → <em>ACS Appl. Electron. Mater. (2021)</em> and <em>J. Mater. Chem. C (2021)</em></li>
+        <li><strong>PPMS (Quantum Design)</strong> 4-probe R-T measurements on superconducting NbN thin films; ICP-OES for precursor stoichiometry verification → <em>Materials 2023</em> publication</li>
+        <li><strong>Thesis:</strong> Synthesizing and Exploiting Perovskite Films for Desired Physical Properties: Oxides, Halides, and Chalcogenides (2022)</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <strong>IIT Bombay — Research Intern</strong>
+        <span class="loc-date">Mumbai, India — 2017–2018</span>
+      </div>
+      <ul>
+        <li>Developed single-crystal growth protocols for halide perovskites; explored lead-free alternatives for PV</li>
+        <li>Built and programmed automated Solar Cell I-V measurement system in LabVIEW</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <strong>BITS Pilani — Student Researcher</strong>
+        <span class="loc-date">Goa, India — 2015–2017</span>
+      </div>
+      <ul>
+        <li>Optimized hydrothermal synthesis of BiFeO₃ nanowire-rGO nanocomposite</li>
+        <li>DFT simulations (Quantum ESPRESSO) to elucidate interfacial polarization mechanisms</li>
+        <li>Sol-gel synthesis of BaTiO₃ nanocrystals using EDTA complexation</li>
+        <li>Publication: <em>J. Phys. Chem. C</em> (2017), &gt;100 citations</li>
+      </ul>
+    </div>
+
+    <h2>Education</h2>
+
+    <div class="edu-entry">
+      <div class="edu-head">
+        <strong>Ph.D., Materials Design and Innovation — University at Buffalo (SUNY)</strong>
+        <span>2022</span>
+      </div>
+      <p class="edu-meta">GPA: 3.967/4.000 — Thesis: Perovskite Films for Desired Physical Properties</p>
+    </div>
+    <div class="edu-entry">
+      <div class="edu-head">
+        <strong>M.S., Materials Design and Innovation — University at Buffalo (SUNY)</strong>
+        <span>2020</span>
+      </div>
+      <p class="edu-meta">GPA: 3.967/4.000 — Coursework: Statistics, Computational Chemistry, DOE, Nanotechnology</p>
+    </div>
+    <div class="edu-entry">
+      <div class="edu-head">
+        <strong>M.Sc.(Hons.) Chemistry + B.E.(Hons.) Electronics &amp; Instrumentation — BITS Pilani</strong>
+        <span>2018</span>
+      </div>
+      <p class="edu-meta">CGPA: 7.45/10 First Division — Dual degree: chemistry + instrumentation engineering</p>
+    </div>
+
+    <h2>Technical Skills</h2>
+
+    <div class="skill-block"><strong>Semiconductor Processing:</strong> PVD (sputtering, evaporation), slot-die coating, spin-coating, blade coating, photolithography, wet/dry etching, plasma processing (ICP-RIE), cleanroom operations, glovebox (&lt;2 ppm O₂/H₂O)</div>
+    <div class="skill-block"><strong>Materials Characterization:</strong> HR-XRD (epitaxial films, rocking curves, RSM), SEM/EDX, AFM, FTIR, Raman, UV-Vis, PL/TRPL, spectrofluorometry, CV-IV, impedance spectroscopy, Hall effect, PPMS (4-probe R-T), RBS (Rutherford backscattering), TGA/DSC, ICP-OES</div>
+    <div class="skill-block"><strong>Radiation Detection:</strong> SiPM readout systems, qCMOS cameras (Hamamatsu Orca Quest), PMT timing, scintillator characterization, X-ray imaging, neutron detection, PSD (pulse shape discrimination)</div>
+    <div class="skill-block"><strong>Data &amp; Automation:</strong> Python (NumPy, SciPy, Pandas, Matplotlib, Langchain), MATLAB, LabVIEW (instrument control, test automation), JMP, R, DOE/statistical analysis, DFT (Quantum ESPRESSO)</div>
+    <div class="skill-block"><strong>Materials Synthesis:</strong> Perovskites (halide, oxide, chalcogenide), quantum dots (hot injection, ball milling), scintillators, functional oxides, polymer-matrix composites, Schlenk line techniques</div>
+    <div class="skill-block"><strong>Hardware Design:</strong> OpenSCAD (parametric CAD), 3D printing, optical system design, PCB design (KiCAD), vacuum system operation</div>
+    <div class="skill-block"><strong>Regulatory:</strong> TSCA, CEPA, GHS/SDS, hazardous materials handling, OSHA compliance, lab safety protocols</div>
+
+    <h2>Publications (16 total, 300+ citations)</h2>
+
+    <div class="pub-group">
+      <h3>Selected First-Author Works</h3>
+      <ul>
+        <li><em>Photonics</em> (2023): Facile Aqueous Solution Route for Chalcogenide Perovskite BaZrS₃ Films</li>
+        <li><em>Nanomaterials</em> (2022): Strain Engineering: Tunable Functionalities of Perovskite Metal Oxide Films (Review)</li>
+        <li><em>IEEE EDTM</em> (2021): Growth of Ferroic Metal Oxide Films by Polymer-assisted Deposition</li>
+        <li><em>J. Phys. Chem. C</em> (2017): BiFeO₃ Nanowire-RGO Nanocomposite (&gt;100 citations)</li>
+      </ul>
+    </div>
+    <div class="pub-group">
+      <h3>Selected Co-Author Works</h3>
+      <ul>
+        <li><em>Materials</em> (2023): CMOS-Compatible Superconducting NbN Films on 300 mm Si Wafer</li>
+        <li><em>Advanced Science</em> (2022): High Entropy Perovskite Thin Films</li>
+        <li><em>ACS Appl. Electron. Mater.</em> (2021): Electroforming-free HfO₂:CeO₂ Memristors</li>
+        <li><em>Nano Energy</em> (2021): Chalcogenide Perovskite BaZrS₃ Thin-Film Devices</li>
+        <li><em>IEEE NSS/MIC/RTSD</em> (2023, 2025 ×2): Radiation detector papers (CapeSym)</li>
+      </ul>
+    </div>
+    <p><a href="https://scholar.google.com/citations?user=ILe-yiQAAAAJ" target="_blank" rel="noopener" style="color:var(--accent-strong)">Full list on Google Scholar →</a></p>
+
+    <h2>Freelance Service Offerings</h2>
+    <div class="services-grid">
+      <div>
+        <h3>Materials R&amp;D Consulting</h3>
+        <ul>
+          <li>Process development review</li>
+          <li>Characterization interpretation</li>
+          <li>Failure analysis</li>
+          <li>DOE/SBIR proposal support</li>
+        </ul>
+        <h3>Lab Automation &amp; Data</h3>
+        <ul>
+          <li>LabVIEW instrument control</li>
+          <li>Python data pipelines</li>
+          <li>Automated test scripts</li>
+          <li>Spectroscopy data processing</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Regulatory Compliance</h3>
+        <ul>
+          <li>GHS/SDS authoring</li>
+          <li>TSCA new chemical notifications</li>
+          <li>CEPA substance notifications</li>
+          <li>HazCom 2024 compliance</li>
+        </ul>
+        <h3>Technical Writing</h3>
+        <ul>
+          <li>SBIR proposal editing</li>
+          <li>Experimental plan review</li>
+          <li>Quarterly progress reports</li>
+          <li>Technical memos</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
