@@ -18,6 +18,7 @@ Current files:
 - `samyak-dhole-sample-sds-memo.html` - sample SDS memo artifact.
 - `multiobjective_bo_qd_synthesis.ipynb` - real BayBE notebook (15 LHS + 3 rounds x 5 = 30 experiments, 6/30 Pareto-optimal); also published on Colab at https://colab.research.google.com/drive/1zH9FNyAFJPQFbk-Fxtxa9l_Lp4oyvb13?usp=sharing
 - `images/favicon.svg` - site favicon.
+- `images/samyak-dhole-xrd-peak-tracking.png` - peak position and FWHM vs. sample index for the 8-sample quartz batch; used in xrd-decision-memo.
 - `images/pareto-BDOE.png` - Plotly 3D scatter screenshot of Pareto frontier (6 red diamond points); used in explainer.
 - `images/samyak-dhole-profile.jpg` - profile photo.
 

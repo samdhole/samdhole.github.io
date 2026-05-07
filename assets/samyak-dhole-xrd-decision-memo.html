@@ -219,6 +219,9 @@
 
     .no-anomalies { color: var(--muted); font-style: italic; }
     .section-note { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.8rem; }
+    figure { margin: 1.5rem 0 0; }
+    figure img { width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--line); }
+    figcaption { font-size: 0.82rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
 
     @media (max-width: 640px) {
       body { padding: 1.5rem 1rem 3rem; }
@@ -274,6 +277,16 @@
     </div>
     
   </div>
+  <figure>
+    <img src="images/samyak-dhole-xrd-peak-tracking.png"
+         alt="Peak Tracking Across Batch: two panels. Left: peak position (2θ°) vs. sample index for 16 tracked reflections — all lines flat, showing position stability across the 8-sample quartz annealing series. Right: FWHM vs. sample index for the same reflections — most lines trend upward, consistent with progressive peak broadening.">
+    <figcaption>
+      Peak tracking across the 8-sample batch. Left: dominant and secondary reflection positions
+      remain stable in 2&theta; throughout the series (all 16 tracked peaks flat within noise).
+      Right: FWHM increases broadly across the batch, consistent with crystallite refinement
+      under the annealing progression encoded in the synthetic dataset.
+    </figcaption>
+  </figure>
 </div>
 
 
