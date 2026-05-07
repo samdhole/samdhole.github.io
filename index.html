@@ -813,60 +813,60 @@
         text-transform: uppercase;
       }
     }
-    .page-nav {
+    .xrd-nav {
       position: fixed;
-      right: 20px;
+      left: 0;
       top: 50%;
       transform: translateY(-50%);
       z-index: 90;
-      display: flex;
-      flex-direction: column;
     }
-    .page-nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .xrd-svg {
+      width: 90px;
+      height: auto;
+      overflow: visible;
     }
-    .page-nav a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: var(--muted);
-      flex-direction: row-reverse;
+    .xrd-curve {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 1;
     }
-    .page-nav-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-      transition: width 0.2s, height 0.2s, background 0.2s;
+    .xrd-pk {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 1.5;
+      transition: stroke 0.25s;
     }
-    .page-nav-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      opacity: 0;
-      transition: opacity 0.2s;
-      white-space: nowrap;
+    .xrd-dot {
+      fill: var(--muted);
+      transition: fill 0.25s;
     }
-    .page-nav a:hover .page-nav-label,
-    .page-nav a.is-active .page-nav-label {
-      opacity: 1;
+    .xrd-lbl {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: Arial, sans-serif;
+      fill: transparent;
+      transition: fill 0.25s;
     }
-    .page-nav a.is-active {
-      color: var(--accent);
+    .xrd-hit {
+      fill: transparent;
+      cursor: pointer;
     }
-    .page-nav a.is-active .page-nav-dot {
-      width: 8px;
-      height: 8px;
+    .xrd-peak-group:hover .xrd-lbl,
+    .xrd-peak-group.is-active .xrd-lbl {
+      fill: var(--accent);
     }
-    @media (max-width: 1100px) {
-      .page-nav { display: none; }
+    .xrd-peak-group.is-active .xrd-pk {
+      stroke: var(--accent);
+      stroke-width: 2;
+    }
+    .xrd-peak-group.is-active .xrd-dot,
+    .xrd-peak-group:hover .xrd-dot {
+      fill: var(--accent);
+    }
+    @media (max-width: 1200px) {
+      .xrd-nav { display: none; }
     }
   </style>
 </head>
@@ -892,17 +892,53 @@
       </div>
     </div>
   </nav>
-  <nav class="page-nav" aria-label="Page sections">
-    <ul>
-      <li><a href="#services"><span class="page-nav-label">Services</span><span class="page-nav-dot"></span></a></li>
-      <li><a href="#proof"><span class="page-nav-label">Work</span><span class="page-nav-dot"></span></a></li>
-      <li><a href="#projects"><span class="page-nav-label">Pricing</span><span class="page-nav-dot"></span></a></li>
-      <li><a href="#fit"><span class="page-nav-label">Fit</span><span class="page-nav-dot"></span></a></li>
-      <li><a href="#process"><span class="page-nav-label">Process</span><span class="page-nav-dot"></span></a></li>
-      <li><a href="#about"><span class="page-nav-label">About</span><span class="page-nav-dot"></span></a></li>
-      <li><a href="#contact"><span class="page-nav-label">Contact</span><span class="page-nav-dot"></span></a></li>
-    </ul>
-  </nav>
+  <aside class="xrd-nav" aria-label="Page sections">
+    <svg class="xrd-svg" viewBox="0 0 110 560" aria-hidden="true">
+      <path class="xrd-curve" d="M 12 0 L 12 27 C 12 36 52 45 52 45 C 52 45 12 54 12 63 Q 13 72 12 80 Q 14 88 12 94 Q 13 97 12 101 C 12 108 37 115 37 115 C 37 115 12 122 12 129 Q 14 138 12 145 Q 13 152 12 158 Q 14 163 12 169 C 12 177 47 185 47 185 C 47 185 12 193 12 201 Q 13 210 12 218 Q 14 224 12 230 Q 13 237 12 243 C 12 249 32 255 32 255 C 32 255 12 261 12 267 Q 13 275 12 283 Q 14 291 12 297 Q 13 303 12 310 C 12 317 42 325 42 325 C 42 325 12 333 12 340 Q 14 349 12 357 Q 13 363 12 370 Q 14 376 12 382 C 12 388 34 395 34 395 C 34 395 12 402 12 408 Q 13 416 12 422 Q 14 430 12 436 Q 13 440 12 440 C 12 450 57 460 57 460 C 57 460 12 470 12 480 L 12 560"/>
+      <g class="xrd-peak-group" data-section="services">
+        <path class="xrd-pk" d="M 12 27 C 12 36 52 45 52 45 C 52 45 12 54 12 63"/>
+        <circle class="xrd-dot" cx="52" cy="45" r="2.5"/>
+        <text class="xrd-lbl" x="57" y="49">Services</text>
+        <rect class="xrd-hit" x="0" y="22" width="110" height="46"/>
+      </g>
+      <g class="xrd-peak-group" data-section="proof">
+        <path class="xrd-pk" d="M 12 101 C 12 108 37 115 37 115 C 37 115 12 122 12 129"/>
+        <circle class="xrd-dot" cx="37" cy="115" r="2.5"/>
+        <text class="xrd-lbl" x="42" y="119">Work</text>
+        <rect class="xrd-hit" x="0" y="96" width="110" height="38"/>
+      </g>
+      <g class="xrd-peak-group" data-section="projects">
+        <path class="xrd-pk" d="M 12 169 C 12 177 47 185 47 185 C 47 185 12 193 12 201"/>
+        <circle class="xrd-dot" cx="47" cy="185" r="2.5"/>
+        <text class="xrd-lbl" x="52" y="189">Pricing</text>
+        <rect class="xrd-hit" x="0" y="164" width="110" height="42"/>
+      </g>
+      <g class="xrd-peak-group" data-section="fit">
+        <path class="xrd-pk" d="M 12 243 C 12 249 32 255 32 255 C 32 255 12 261 12 267"/>
+        <circle class="xrd-dot" cx="32" cy="255" r="2.5"/>
+        <text class="xrd-lbl" x="37" y="259">Fit</text>
+        <rect class="xrd-hit" x="0" y="238" width="110" height="34"/>
+      </g>
+      <g class="xrd-peak-group" data-section="process">
+        <path class="xrd-pk" d="M 12 310 C 12 317 42 325 42 325 C 42 325 12 333 12 340"/>
+        <circle class="xrd-dot" cx="42" cy="325" r="2.5"/>
+        <text class="xrd-lbl" x="47" y="329">Process</text>
+        <rect class="xrd-hit" x="0" y="305" width="110" height="40"/>
+      </g>
+      <g class="xrd-peak-group" data-section="about">
+        <path class="xrd-pk" d="M 12 382 C 12 388 34 395 34 395 C 34 395 12 402 12 408"/>
+        <circle class="xrd-dot" cx="34" cy="395" r="2.5"/>
+        <text class="xrd-lbl" x="39" y="399">About</text>
+        <rect class="xrd-hit" x="0" y="377" width="110" height="36"/>
+      </g>
+      <g class="xrd-peak-group" data-section="contact">
+        <path class="xrd-pk" d="M 12 440 C 12 450 57 460 57 460 C 57 460 12 470 12 480"/>
+        <circle class="xrd-dot" cx="57" cy="460" r="2.5"/>
+        <text class="xrd-lbl" x="62" y="464">Contact</text>
+        <rect class="xrd-hit" x="0" y="435" width="110" height="50"/>
+      </g>
+    </svg>
+  </aside>
   <main id="top">
     <header class="hero">
       <div class="wrap hero-grid">
@@ -1199,17 +1235,22 @@
   <script>
     (function () {
       var ids = ['services','proof','projects','fit','process','about','contact'];
-      var links = {};
+      var groups = {};
       ids.forEach(function (id) {
-        var el = document.querySelector('.page-nav a[href="#' + id + '"]');
-        if (el) links[id] = el;
+        var el = document.querySelector('.xrd-peak-group[data-section="' + id + '"]');
+        if (el) {
+          groups[id] = el;
+          el.querySelector('.xrd-hit').addEventListener('click', function () {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+          });
+        }
       });
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            Object.values(links).forEach(function (l) { l.classList.remove('is-active'); });
+            Object.values(groups).forEach(function (g) { g.classList.remove('is-active'); });
             var id = entry.target.id;
-            if (links[id]) links[id].classList.add('is-active');
+            if (groups[id]) groups[id].classList.add('is-active');
           }
         });
       }, { rootMargin: '-35% 0px -35% 0px' });
