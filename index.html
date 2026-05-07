@@ -811,6 +811,61 @@
         text-transform: uppercase;
       }
     }
+    .page-nav {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+    }
+    .page-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .page-nav a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      flex-direction: row-reverse;
+    }
+    .page-nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      transition: width 0.2s, height 0.2s, background 0.2s;
+    }
+    .page-nav-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .page-nav a:hover .page-nav-label,
+    .page-nav a.is-active .page-nav-label {
+      opacity: 1;
+    }
+    .page-nav a.is-active {
+      color: var(--accent);
+    }
+    .page-nav a.is-active .page-nav-dot {
+      width: 8px;
+      height: 8px;
+    }
+    @media (max-width: 1100px) {
+      .page-nav { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -820,8 +875,10 @@
       <div class="nav-links" aria-label="Section links">
         <a href="#services">Services</a>
         <a href="#proof">Work</a>
-        <a href="#projects">Projects</a>
+        <a href="#projects">Pricing</a>
+        <a href="#fit">Fit</a>
         <a href="#process">Process</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
         <a class="nav-cv" href="assets/samyak-dhole-cv.html">CV</a>
         <a class="nav-icon" href="https://www.linkedin.com/in/sam-d-0135b0130/" target="_blank" rel="noopener" aria-label="LinkedIn">
@@ -832,6 +889,17 @@
         </a>
       </div>
     </div>
+  </nav>
+  <nav class="page-nav" aria-label="Page sections">
+    <ul>
+      <li><a href="#services"><span class="page-nav-label">Services</span><span class="page-nav-dot"></span></a></li>
+      <li><a href="#proof"><span class="page-nav-label">Work</span><span class="page-nav-dot"></span></a></li>
+      <li><a href="#projects"><span class="page-nav-label">Pricing</span><span class="page-nav-dot"></span></a></li>
+      <li><a href="#fit"><span class="page-nav-label">Fit</span><span class="page-nav-dot"></span></a></li>
+      <li><a href="#process"><span class="page-nav-label">Process</span><span class="page-nav-dot"></span></a></li>
+      <li><a href="#about"><span class="page-nav-label">About</span><span class="page-nav-dot"></span></a></li>
+      <li><a href="#contact"><span class="page-nav-label">Contact</span><span class="page-nav-dot"></span></a></li>
+    </ul>
   </nav>
   <main id="top">
     <header class="hero">
@@ -1126,5 +1194,28 @@
       </footer>
     </section>
   </main>
+  <script>
+    (function () {
+      var ids = ['services','proof','projects','fit','process','about','contact'];
+      var links = {};
+      ids.forEach(function (id) {
+        var el = document.querySelector('.page-nav a[href="#' + id + '"]');
+        if (el) links[id] = el;
+      });
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            Object.values(links).forEach(function (l) { l.classList.remove('is-active'); });
+            var id = entry.target.id;
+            if (links[id]) links[id].classList.add('is-active');
+          }
+        });
+      }, { rootMargin: '-35% 0px -35% 0px' });
+      ids.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    })();
+  </script>
 </body>
 </html>
