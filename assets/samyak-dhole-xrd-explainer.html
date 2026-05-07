@@ -7,10 +7,23 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg: #f7f5ef;
+      --paper: #fffefa;
+      --ink: #191b1d;
+      --muted: #5f676b;
+      --line: #d8d4c8;
+      --accent: #12605a;
+      --accent-strong: #0d4743;
+      --accent-soft: #dcebe8;
+      --warn: #7a5a15;
+      --shadow: 0 18px 45px rgba(26, 31, 35, 0.08);
+    }
+
     body {
-      background: #0d1117;
-      color: #c9d1d9;
-      font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
       font-size: 16px;
       line-height: 1.65;
     }
@@ -22,32 +35,40 @@
     }
 
     .eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(18, 96, 90, 0.24);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.2;
+      padding: 6px 10px;
       text-transform: uppercase;
-      color: #58a6ff;
-      font-weight: 600;
       margin-bottom: 0.75rem;
     }
 
     h1 {
-      font-size: 2.1rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 700;
-      color: #f0f6fc;
-      line-height: 1.25;
+      color: var(--ink);
+      line-height: 1.08;
       margin-bottom: 1rem;
     }
 
     .subtitle {
       font-size: 1.05rem;
-      color: #8b949e;
+      color: var(--muted);
       margin-bottom: 2.5rem;
       max-width: 640px;
     }
 
     hr {
       border: none;
-      border-top: 1px solid #30363d;
+      border-top: 1px solid var(--line);
       margin: 2.5rem 0;
     }
 
@@ -58,7 +79,7 @@
       font-size: 0.85rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #8b949e;
+      color: var(--muted);
       margin-bottom: 1rem;
     }
 
@@ -70,48 +91,49 @@
     }
 
     .timing-card {
-      background: #161b22;
-      border: 1px solid #30363d;
+      background: var(--paper);
+      border: 1px solid var(--line);
       border-radius: 8px;
       padding: 1.75rem 1.5rem;
       text-align: center;
+      box-shadow: var(--shadow);
     }
 
-    .timing-card.before { border-color: #3d2b2b; }
-    .timing-card.after  { border-color: #1b3a1b; }
+    .timing-card.before { border-color: rgba(122, 90, 21, 0.35); }
+    .timing-card.after  { border-color: rgba(18, 96, 90, 0.35); }
 
     .timing-number {
+      font-family: Georgia, "Times New Roman", serif;
       font-size: 3.2rem;
-      font-weight: 800;
-      color: #f0883e;
+      font-weight: 700;
+      color: var(--warn);
       display: block;
       line-height: 1;
-      font-variant-numeric: tabular-nums;
     }
 
-    .timing-card.after .timing-number { color: #3fb950; }
+    .timing-card.after .timing-number { color: var(--accent); }
 
     .timing-label {
       font-size: 0.85rem;
-      color: #8b949e;
+      color: var(--muted);
       margin-top: 0.5rem;
     }
 
     .timing-label strong {
       display: block;
-      color: #c9d1d9;
+      color: var(--ink);
       font-size: 1rem;
       margin-bottom: 0.15rem;
     }
 
     .timing-arrow {
       font-size: 2rem;
-      color: #58a6ff;
+      color: var(--accent);
       text-align: center;
       user-select: none;
     }
 
-    /* ── What it does ── */
+    /* ── Pipeline steps ── */
     .pipeline-steps {
       list-style: none;
       padding: 0;
@@ -122,7 +144,7 @@
       display: flex;
       gap: 1rem;
       padding: 0.6rem 0;
-      border-bottom: 1px solid #21262d;
+      border-bottom: 1px solid var(--line);
     }
 
     .pipeline-steps li:last-child { border-bottom: none; }
@@ -131,20 +153,20 @@
       flex-shrink: 0;
       width: 1.6rem;
       height: 1.6rem;
-      background: #21262d;
-      border: 1px solid #30363d;
+      background: var(--accent-soft);
+      border: 1px solid rgba(18, 96, 90, 0.24);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.75rem;
-      font-weight: 700;
-      color: #58a6ff;
+      font-weight: 800;
+      color: var(--accent-strong);
       margin-top: 0.1rem;
     }
 
-    .step-content strong { color: #e6edf3; }
-    .step-content p { font-size: 0.9rem; color: #8b949e; margin-top: 0.15rem; }
+    .step-content strong { color: var(--ink); }
+    .step-content p { font-size: 0.9rem; color: var(--muted); margin-top: 0.15rem; }
 
     /* ── Technical approach ── */
     .tech-grid {
@@ -155,23 +177,25 @@
     }
 
     .tech-card {
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 6px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
       padding: 0.9rem 1rem;
+      box-shadow: var(--shadow);
     }
 
     .tech-card .tech-label {
       font-size: 0.72rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #58a6ff;
+      color: var(--accent);
+      font-weight: 700;
       margin-bottom: 0.3rem;
     }
 
     .tech-card p {
       font-size: 0.88rem;
-      color: #8b949e;
+      color: var(--muted);
     }
 
     /* ── Tags ── */
@@ -184,13 +208,14 @@
 
     .badge {
       display: inline-block;
-      background: #21262d;
-      color: #8b949e;
-      border: 1px solid #30363d;
-      border-radius: 100px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(18, 96, 90, 0.24);
+      border-radius: 999px;
       padding: 3px 12px;
-      font-size: 0.8rem;
-      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
     }
 
     /* ── Links ── */
@@ -202,11 +227,13 @@
     }
 
     .btn {
-      display: inline-block;
-      padding: 0.55rem 1.3rem;
-      border-radius: 6px;
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      padding: 0 1.3rem;
+      border-radius: 8px;
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
       transition: opacity 0.15s;
     }
@@ -214,50 +241,50 @@
     .btn:hover { opacity: 0.85; }
 
     .btn-primary {
-      background: #238636;
+      background: var(--accent);
       color: #fff;
-      border: 1px solid #2ea043;
+      border: 1px solid var(--accent-strong);
     }
 
     .btn-secondary {
       background: transparent;
-      color: #58a6ff;
-      border: 1px solid #30363d;
+      color: var(--accent-strong);
+      border: 1px solid var(--line);
     }
 
     .back-link {
       font-size: 0.85rem;
-      color: #58a6ff;
+      color: var(--accent);
       text-decoration: none;
     }
 
     .back-link:hover { text-decoration: underline; }
 
-    /* ── The gap section ── */
+    /* ── Gap callout ── */
     .gap-callout {
-      background: #161b22;
-      border-left: 3px solid #f0883e;
-      border-radius: 0 6px 6px 0;
+      background: var(--paper);
+      border-left: 3px solid var(--warn);
+      border-radius: 0 8px 8px 0;
       padding: 1rem 1.25rem;
       margin: 1rem 0;
+      box-shadow: var(--shadow);
     }
 
     .gap-callout p {
       font-size: 0.95rem;
-      color: #c9d1d9;
+      color: var(--ink);
     }
 
-    .gap-callout strong { color: #f0883e; }
-
     section h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #e6edf3;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
       margin-bottom: 0.75rem;
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 1.5rem; }
+      h1 { font-size: 1.6rem; }
       .timing-grid { grid-template-columns: 1fr; }
       .timing-arrow { transform: rotate(90deg); }
       .timing-number { font-size: 2.4rem; }
@@ -267,7 +294,7 @@
 <body>
 <div class="container">
 
-  <a href="https://samdhole.github.io" class="back-link">← Back to portfolio</a>
+  <a href="https://samdhole.github.io" class="back-link">&#8592; Back to portfolio</a>
 
   <div style="margin-top: 2.5rem;">
     <p class="eyebrow">Materials Characterization Automation</p>
@@ -296,13 +323,13 @@
         </div>
       </div>
 
-      <div class="timing-arrow">→</div>
+      <div class="timing-arrow">&#8594;</div>
 
       <div class="timing-card after">
         <span class="timing-number">~20 sec</span>
         <div class="timing-label">
           <strong>This pipeline</strong>
-          Load → Auto-detect → Batch-fit → Trend-track → Memo.
+          Load &#8594; Auto-detect &#8594; Batch-fit &#8594; Trend-track &#8594; Memo.
           A consistent decision memo comes out with traceable tables,
           fit overlays, residuals, and validation caveats.
         </div>
@@ -382,7 +409,7 @@
       </div>
       <div class="tech-card">
         <div class="tech-label">Peak fitting</div>
-        <p>lmfit PseudoVoigt (Gaussian + Lorentzian mix), per-peak ROI ±0.25°. Levenberg-Marquardt with linear local background. ~30 ms per peak.</p>
+        <p>lmfit PseudoVoigt (Gaussian + Lorentzian mix), per-peak ROI &#177;0.25&#176;. Levenberg-Marquardt with linear local background. ~30 ms per peak.</p>
       </div>
       <div class="tech-card">
         <div class="tech-label">Crystallite size</div>
@@ -390,7 +417,7 @@
       </div>
       <div class="tech-card">
         <div class="tech-label">Outlier flagging</div>
-        <p>R² threshold (poor fit) + IQR on FWHM and crystallite size. Single Flag column with R² value embedded — no false confidence at small n.</p>
+        <p>R&#178; threshold (poor fit) + IQR on FWHM and crystallite size. Single Flag column with R&#178; value embedded — no false confidence at small n.</p>
       </div>
       <div class="tech-card">
         <div class="tech-label">Output</div>
