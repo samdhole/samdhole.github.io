@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XRD Batch Analysis to Technical Memo · Sam Dhole</title>
+  <title>Scientific Data to Technical Memo · Sam Dhole</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -270,11 +270,12 @@
   <a href="https://samdhole.github.io" class="back-link">← Back to portfolio</a>
 
   <div style="margin-top: 2.5rem;">
-    <p class="eyebrow">Characterization Pipeline</p>
-    <h1>XRD Batch Analysis<br>to Technical Memo</h1>
+    <p class="eyebrow">Materials Characterization Automation</p>
+    <h1>Raw XRD Patterns<br>to Decision-Ready Technical Memo</h1>
     <p class="subtitle">
-      Automated peak fitting, crystallite sizing, and anomaly detection across 8 XRD
-      diffraction patterns — delivered as a formatted, portable HTML memo.
+      Converts a same-material characterization batch into a reviewable report:
+      dominant peak stability, FWHM trend, Scherrer upper-bound size trend,
+      fit-quality flags, and scientist-review figures in one portable HTML memo.
     </p>
   </div>
 
@@ -282,27 +283,28 @@
 
   <!-- Timing hero -->
   <section class="timing-section">
-    <h2>The before / after</h2>
+    <h2>The buyer problem</h2>
     <div class="timing-grid">
       <div class="timing-card before">
-        <span class="timing-number">4 hrs</span>
+        <span class="timing-number">~4 hrs</span>
         <div class="timing-label">
           <strong>Manual workflow</strong>
-          Open each file in JADE or HighScore.
-          Fit peaks by hand. Record FWHM to spreadsheet.
-          Compute Scherrer sizes. Write memo.
+          Open each pattern in JADE / HighScore / EVA.
+          Identify reflections by eye. Fit profile per peak.
+          Track positions and FWHMs across the batch in a spreadsheet.
+          Write the memo and hope the next batch is reported the same way.
         </div>
       </div>
 
       <div class="timing-arrow">→</div>
 
       <div class="timing-card after">
-        <span class="timing-number">~90 sec</span>
+        <span class="timing-number">~20 sec</span>
         <div class="timing-label">
           <strong>This pipeline</strong>
-          Load → Fit → Analyze → Report.
-          Single Python call. Zero manual steps.
-          Portable HTML memo out.
+          Load → Auto-detect → Batch-fit → Trend-track → Memo.
+          A consistent decision memo comes out with traceable tables,
+          fit overlays, residuals, and validation caveats.
         </div>
       </div>
     </div>
@@ -312,34 +314,41 @@
 
   <!-- What it does -->
   <section>
-    <h2>What it does</h2>
+    <h2>What a buyer gets</h2>
     <ul class="pipeline-steps">
       <li>
         <div class="step-num">1</div>
         <div class="step-content">
-          <strong>Load</strong>
-          <p>Parses RRUFF-format .txt files with variable-length metadata headers. Reads wavelength from file; defaults to Cu Kα (1.54056 Å).</p>
+          <strong>Raw data intake</strong>
+          <p>Parses RRUFF-format .txt files with variable-length metadata headers. Reads wavelength from file; defaults to Cu K&#945; (1.54056 &#8491;).</p>
         </div>
       </li>
       <li>
         <div class="step-num">2</div>
         <div class="step-content">
-          <strong>Fit</strong>
-          <p>Auto-detects peaks via scipy. Builds a dynamic lmfit composite model — one PseudoVoigt profile per peak. Computes R², AIC, BIC per sample.</p>
+          <strong>Repeatable peak detection</strong>
+          <p>Difference of Gaussians (after <em>xrfit</em>): a narrow Gaussian preserves peaks while a wide one approximates baseline. Peak candidates are selected from an adaptive MAD-noise threshold, reducing hand-tuned settings across repeat batches.</p>
         </div>
       </li>
       <li>
         <div class="step-num">3</div>
         <div class="step-content">
-          <strong>Analyze</strong>
-          <p>Extracts d-spacings (Bragg's law) and crystallite sizes (Scherrer equation, K=0.9). Flags outliers by Z-score and IQR.</p>
+          <strong>Scientist-reviewable fits</strong>
+          <p>Per-peak ROI lmfit PseudoVoigt + linear background. Quality filters reject weak or poor fits, and each sample gets an overlay and residual panel for human review.</p>
         </div>
       </li>
       <li>
         <div class="step-num">4</div>
         <div class="step-content">
-          <strong>Report</strong>
-          <p>Renders a Jinja2 HTML memo with all 8 sample figures embedded as base64 PNGs. Single portable file — no external dependencies.</p>
+          <strong>Process signal extraction</strong>
+          <p>Same-material batch: tracks dominant peak position, FWHM, d-spacing, and Scherrer upper-bound size so a process engineer sees whether the batch drifted, broadened, or needs review.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>Decision memo</strong>
+          <p>Jinja2 HTML memo with process signal, decision implication, validation notes, summary table, full per-peak table, and base64-embedded figures. Single portable file.</p>
         </div>
       </li>
     </ul>
@@ -349,13 +358,14 @@
 
   <!-- The gap -->
   <section>
-    <h2>The gap this fills</h2>
+    <h2>The commercial gap</h2>
     <div class="gap-callout">
       <p>
-        SpectraFit, xrdfit, and Materials_Data_Analytics all stop at fit parameters.
-        Every one delivers a table of numbers. <strong>Nobody generates the memo.</strong>
-        This pipeline goes the last mile — from raw diffraction data to a formatted
-        deliverable a non-specialist buyer can read and act on.
+        Peak fitting is not the whole job. Labs still need the last mile:
+        repeatable batch analysis, validation notes, and a memo a process engineer
+        or technical manager can act on without rebuilding the analysis in a spreadsheet.
+        This demo shows the kind of bespoke automation I build for characterization
+        teams: the scientific method stays visible, but the reporting burden is automated.
       </p>
     </div>
   </section>
@@ -367,20 +377,24 @@
     <h2>Technical approach</h2>
     <div class="tech-grid">
       <div class="tech-card">
+        <div class="tech-label">Peak detection</div>
+        <p>Difference of Gaussians + adaptive MAD-noise threshold for repeatable candidate detection across similar patterns.</p>
+      </div>
+      <div class="tech-card">
         <div class="tech-label">Peak fitting</div>
-        <p>lmfit PseudoVoigt (Gaussian + Lorentzian mix). Auto-detected peak count; capped at 15 per spectrum.</p>
+        <p>lmfit PseudoVoigt (Gaussian + Lorentzian mix), per-peak ROI ±0.25°. Levenberg-Marquardt with linear local background. ~30 ms per peak.</p>
       </div>
       <div class="tech-card">
         <div class="tech-label">Crystallite size</div>
-        <p>Scherrer equation D = Kλ/βcosθ, K=0.9. Upper-bound estimates; instrument broadening not subtracted.</p>
+        <p>Scherrer equation D = K&#955;/&#946;cos&#952;, K=0.9. Upper-bound estimates; instrument broadening not subtracted.</p>
       </div>
       <div class="tech-card">
-        <div class="tech-label">Outlier detection</div>
-        <p>Dual method: Z-score (|z| &gt; 2.5) + IQR supplement. IQR is more reliable at small n.</p>
+        <div class="tech-label">Outlier flagging</div>
+        <p>R² threshold (poor fit) + IQR on FWHM and crystallite size. Single Flag column with R² value embedded — no false confidence at small n.</p>
       </div>
       <div class="tech-card">
         <div class="tech-label">Output</div>
-        <p>Single-file HTML memo. All figures base64-embedded. Print-ready layout with summary table and next steps.</p>
+        <p>Single-file HTML memo: process signal, decision implication, validation notes, summary table, full per-peak table, and sample fits.</p>
       </div>
     </div>
   </section>
@@ -395,6 +409,7 @@
       <span class="badge">XRD</span>
       <span class="badge">lmfit</span>
       <span class="badge">Automated reporting</span>
+      <span class="badge">Decision memo</span>
       <span class="badge">Materials</span>
       <span class="badge">Jupyter</span>
       <span class="badge">scipy</span>
@@ -408,10 +423,12 @@
   <section>
     <h2>Explore</h2>
     <div class="actions">
-      <a href="https://github.com/samdhole/samdhole.github.io/blob/main/assets/samyak-dhole-xrd-batch-analysis.ipynb"
-         class="btn btn-primary" target="_blank" rel="noopener">View Notebook on GitHub</a>
+      <a href="samyak-dhole-xrd-decision-memo.html"
+         class="btn btn-primary">View Memo</a>
+      <a href="https://nbviewer.org/github/samdhole/autoxrddemo/blob/main/notebooks/xrd_batch_analysis.ipynb"
+         class="btn btn-secondary" target="_blank" rel="noopener">Technical Notebook</a>
       <a href="https://github.com/samdhole/autoxrddemo"
-         class="btn btn-secondary" target="_blank" rel="noopener">Full repo →</a>
+         class="btn btn-secondary" target="_blank" rel="noopener">GitHub &#8594;</a>
     </div>
   </section>
 

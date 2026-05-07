@@ -9,6 +9,8 @@ ops/
 docs/
 memory/
 
+DESIGN.md
+
 # gitingest output and local Claude Code settings
 digest.txt
 .claude/settings.local.json
